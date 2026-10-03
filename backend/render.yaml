@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: hinglish-grammarly-backend
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /health
+    envVars:
+      - key: FRONTEND_ORIGIN
+        sync: false
+      - key: BACKEND_REGISTRATION_TOKEN
+        sync: false
+      - key: COLAB_REQUEST_TIMEOUT_MS
+        value: "25000"
