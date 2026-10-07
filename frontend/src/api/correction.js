@@ -65,14 +65,15 @@ export async function correctText(text) {
 }
 
 /**
- * Fetches whether the correction model is currently reachable.
- * Never throws — resolves to { available: false } on any failure.
+ * Fetches whether a given model service ("correct" or "predict") is
+ * currently reachable. Never throws — resolves to { available: false }
+ * on any failure.
  */
-export async function getModelStatus() {
+export async function getModelStatus(service = 'correct') {
   const { signal, cancel } = withTimeout(8000)
 
   try {
-    const response = await fetch(`${BASE}/api/model/status`, { signal })
+    const response = await fetch(`${BASE}/api/model/status?service=${encodeURIComponent(service)}`, { signal })
     cancel()
     if (!response.ok) return { available: false }
     const data = await parseJsonSafe(response)

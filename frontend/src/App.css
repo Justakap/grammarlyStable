@@ -172,16 +172,25 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 12px;
   color: var(--color-text-muted);
   font-size: 0.875rem;
   margin-top: 8px;
+  flex-wrap: wrap;
+}
+
+.app-footer-sep {
+  opacity: 0.6;
 }
 
 .model-status {
   display: inline-flex;
   align-items: center;
   gap: 6px;
+}
+
+.model-status-label {
+  color: var(--color-text-muted);
 }
 
 .status-dot {

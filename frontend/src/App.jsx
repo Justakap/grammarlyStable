@@ -9,14 +9,17 @@ const STATUS_POLL_MS = 20000
 
 export default function App() {
   const [text, setText] = useState('')
-  const [modelState, setModelState] = useState('connecting')
+  const [correctState, setCorrectState] = useState('connecting')
+  const [predictState, setPredictState] = useState('connecting')
 
   useEffect(() => {
     let cancelled = false
 
     async function pollStatus() {
-      const { available } = await getModelStatus()
-      if (!cancelled) setModelState(available ? 'available' : 'unavailable')
+      const [correct, predict] = await Promise.all([getModelStatus('correct'), getModelStatus('predict')])
+      if (cancelled) return
+      setCorrectState(correct.available ? 'available' : 'unavailable')
+      setPredictState(predict.available ? 'available' : 'unavailable')
     }
 
     pollStatus()
@@ -35,8 +38,9 @@ export default function App() {
         <Editor value={text} onChange={setText} onClear={() => setText('')} />
 
         <footer className="app-footer">
-          <span className="app-footer-label">Model status:</span>
-          <ModelStatus state={modelState} />
+          <ModelStatus label="Correction" state={correctState} />
+          <span className="app-footer-sep">&middot;</span>
+          <ModelStatus label="Prediction" state={predictState} />
         </footer>
       </div>
     </div>
