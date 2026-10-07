@@ -91,7 +91,9 @@ export default function Editor({ value, onChange, onClear }) {
     const newValue = value.slice(0, issue.start) + issue.suggestion + value.slice(issue.end)
     pendingCaretRef.current = issue.start + issue.suggestion.length
     onChange(newValue)
+    checkRequestIdRef.current++ // invalidate any in-flight check against the pre-fix text
     setHoveredIssue(null)
+    setIssues([]) // show the fix immediately instead of the stale pre-fix text until the next check lands
     clearTimeout(checkTimerRef.current)
     runCheck(newValue)
   }
@@ -107,6 +109,8 @@ export default function Editor({ value, onChange, onClear }) {
     pendingCaretRef.current = before.length + insertion.length
     onChange(newValue)
     setSuggestions([])
+    checkRequestIdRef.current++
+    setIssues([])
 
     clearTimeout(checkTimerRef.current)
     runCheck(newValue)
@@ -137,11 +141,17 @@ export default function Editor({ value, onChange, onClear }) {
 
   // Imperatively sync the contentEditable DOM from `value`/`issues`, since
   // React's normal reconciliation fights contentEditable's own DOM
-  // mutations. The caret is restored from `pendingCaretRef`, set right
-  // before whichever state change triggered this sync.
+  // mutations. This can be triggered either by a direct user action (which
+  // sets `pendingCaretRef` to where the caret should end up) or by a
+  // background correction check landing with no user action at all — in
+  // that second case we must capture whatever the caret's current position
+  // is *before* wiping the DOM, or the browser resets it to the start.
   useLayoutEffect(() => {
     const el = editableRef.current
     if (!el) return
+
+    const isFocused = document.activeElement === el
+    const caretToRestore = pendingCaretRef.current != null ? pendingCaretRef.current : isFocused ? getCaretOffset(el) : null
 
     el.innerHTML = ''
     if (issues.length === 0) {
@@ -159,8 +169,8 @@ export default function Editor({ value, onChange, onClear }) {
       })
     }
 
-    if (document.activeElement === el && pendingCaretRef.current != null) {
-      setCaretOffset(el, pendingCaretRef.current)
+    if (isFocused && caretToRestore != null) {
+      setCaretOffset(el, caretToRestore)
     }
     pendingCaretRef.current = null
   }, [value, issues])
