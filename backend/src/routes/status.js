@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { getColabUrl } from '../lib/colabStore.js'
+import { getColabUrl, isValidService } from '../lib/colabStore.js'
 
 const router = Router()
 
@@ -7,8 +7,14 @@ const HEALTH_TIMEOUT_MS = 4000
 
 // Reports whether a Colab endpoint is registered and currently reachable.
 // Never exposes the actual URL to the caller.
-router.get('/model/status', async (_req, res) => {
-  const colabUrl = getColabUrl()
+// ?service=correct (default) or ?service=predict
+router.get('/model/status', async (req, res) => {
+  const service = req.query.service
+  if (service !== undefined && !isValidService(service)) {
+    return res.status(400).json({ error: 'If provided, "service" must be "correct" or "predict".' })
+  }
+
+  const colabUrl = getColabUrl(service)
 
   if (!colabUrl) {
     return res.json({ available: false })

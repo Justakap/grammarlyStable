@@ -2,6 +2,7 @@ import 'dotenv/config'
 import express from 'express'
 import cors from 'cors'
 import correctRouter from './routes/correct.js'
+import predictRouter from './routes/predict.js'
 import colabRouter from './routes/colab.js'
 import statusRouter from './routes/status.js'
 
@@ -25,6 +26,7 @@ app.use(express.json({ limit: '100kb' }))
 app.get('/health', (_req, res) => res.json({ ok: true }))
 
 app.use('/api', correctRouter)
+app.use('/api', predictRouter)
 app.use('/api', colabRouter)
 app.use('/api', statusRouter)
 

@@ -8,15 +8,19 @@ Google Colab.
 ## Architecture
 
 ```
-React frontend  --POST /api/correct-->  Backend  --POST /correct-->  Colab (FastAPI + 4B model)
+React frontend  --POST /api/correct-->  Backend  --POST /correct-->  Colab #1 (grammar correction model)
+React frontend  --POST /api/predict-->  Backend  --POST /predict-->  Colab #2 (next-word prediction model)
 ```
 
-- The frontend only ever talks to the backend (`VITE_API_URL`). It never knows the Colab URL.
-- The Colab URL changes every time a new Colab runtime/tunnel starts. The Colab notebook
-  registers its current public URL with the backend via `POST /api/colab/register`
-  (authenticated with a shared secret token).
-- The backend stores the active Colab URL in memory and forwards `/api/correct`
-  requests to `<colab_url>/correct`.
+- The frontend only ever talks to the backend (`VITE_API_URL`). It never knows either Colab URL.
+- Each feature has its own independent Colab runtime and its own registered URL, tracked by the
+  backend under a `service` name: `"correct"` (the default) or `"predict"`. Restarting one
+  Colab runtime has no effect on the other.
+- A Colab URL changes every time its runtime/tunnel restarts. Each notebook registers its
+  current public URL with the backend via `POST /api/colab/register` (authenticated with a
+  shared secret token), passing `service: "correct"` or `service: "predict"`.
+- The backend stores each service's active Colab URL in memory and forwards requests
+  accordingly: `/api/correct` → `<correct_colab_url>/correct`, `/api/predict` → `<predict_colab_url>/predict`.
 
 ## Project layout
 
@@ -34,17 +38,26 @@ Request: `{ "text": "mujhe kal college jana hai" }`
 Response: `{ "corrected": "Mujhe kal college jaana hai." }`
 `503` if no Colab model is currently registered.
 
-### `GET /api/model/status` (backend)
-Response: `{ "available": true }` — never exposes the actual Colab URL.
+### `POST /api/predict` (backend)
+Request: `{ "text": "mujhe kal market" }`
+Response: `{ "predictions": ["jana", "jaana", "ja"] }`
+`503` if no predict Colab model is currently registered.
+
+### `GET /api/model/status[?service=correct|predict]` (backend)
+Response: `{ "available": true }` — never exposes the actual Colab URL. Defaults to `service=correct`.
 
 ### `POST /api/colab/register` (backend, called only by Colab)
 Header: `Authorization: Bearer <BACKEND_REGISTRATION_TOKEN>`
-Request: `{ "url": "https://current-colab-url" }`
-Response: `{ "ok": true }` / `401` if unauthorized.
+Request: `{ "url": "https://current-colab-url", "service": "correct" | "predict" }` (`service` defaults to `"correct"`)
+Response: `{ "ok": true }` / `401` if unauthorized / `400` if `service` is invalid.
 
-### `POST /correct` (Colab FastAPI)
+### `POST /correct` (Colab #1 FastAPI)
 Request: `{ "text": "mujhe kal college jana hai" }`
 Response: `{ "corrected": "Mujhe kal college jaana hai." }`
+
+### `POST /predict` (Colab #2 FastAPI)
+Request: `{ "text": "mujhe kal market" }`
+Response: `{ "predictions": ["jana", "jaana", "ja"] }`
 
 ## Running everything
 
@@ -95,6 +108,15 @@ that's expected, not a bug.
    sends it to Render via `POST /api/colab/register`. Render overwrites the previously
    stored URL with this new one. If a long-running tunnel ever drops mid-session, just
    re-run cells 5 and 6 to get a fresh URL registered — no frontend or backend changes needed.
+
+### 2b. A second Colab runtime for next-word prediction
+
+The next-word-prediction model runs as its own independent Colab notebook/runtime,
+registering under `service: "predict"` instead of the default `"correct"`. It needs its
+own `BACKEND_URL` + `BACKEND_REGISTRATION_TOKEN` (same values as the correction notebook)
+and its own LoRA checkpoint path. Starting, stopping, or restarting this runtime never
+affects the grammar-correction service, since the backend tracks each service's URL
+separately.
 
 ### 3. Frontend
 

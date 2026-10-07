@@ -16,7 +16,7 @@ router.post('/correct', async (req, res) => {
     return res.status(400).json({ error: 'Text is too long. Please shorten your sentence.' })
   }
 
-  const colabUrl = getColabUrl()
+  const colabUrl = getColabUrl('correct')
   if (!colabUrl) {
     return res.status(503).json({ error: 'Correction model is currently unavailable.' })
   }

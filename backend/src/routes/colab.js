@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { setColabUrl } from '../lib/colabStore.js'
+import { setColabUrl, isValidService } from '../lib/colabStore.js'
 
 const router = Router()
 
@@ -27,14 +27,18 @@ router.post('/colab/register', (req, res) => {
     return res.status(401).json({ error: 'Unauthorized.' })
   }
 
-  const { url } = req.body || {}
+  const { url, service } = req.body || {}
 
   if (typeof url !== 'string' || !isValidHttpUrl(url)) {
     return res.status(400).json({ error: 'A valid "url" field is required.' })
   }
 
-  setColabUrl(url)
-  console.log(`Registered new Colab endpoint: ${url}`)
+  if (service !== undefined && !isValidService(service)) {
+    return res.status(400).json({ error: 'If provided, "service" must be "correct" or "predict".' })
+  }
+
+  setColabUrl(url, service)
+  console.log(`Registered new Colab endpoint for "${service || 'correct'}": ${url}`)
 
   return res.json({ ok: true })
 })
