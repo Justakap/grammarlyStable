@@ -63,6 +63,29 @@
   color: var(--color-text-muted);
 }
 
+.predict-suggestions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.predict-chip {
+  background: #eef0fd;
+  border: 1px solid rgba(58, 91, 253, 0.25);
+  color: var(--color-primary);
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.predict-chip:hover {
+  background: rgba(58, 91, 253, 0.12);
+}
+
 .editor-footer {
   margin-top: 14px;
   padding-top: 14px;

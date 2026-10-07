@@ -82,3 +82,29 @@ export async function getModelStatus() {
     return { available: false }
   }
 }
+
+/**
+ * Fetches next-word suggestions for the given (partial) Hinglish text.
+ * Never throws — resolves to [] on any failure, so a flaky prediction
+ * model never disrupts typing.
+ */
+export async function predictNextWords(text) {
+  const { signal, cancel } = withTimeout(8000)
+
+  try {
+    const response = await fetch(`${BASE}/api/predict`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ text }),
+      signal,
+    })
+    cancel()
+    if (!response.ok) return []
+    const data = await parseJsonSafe(response)
+    if (!data || !Array.isArray(data.predictions)) return []
+    return data.predictions.filter((word) => typeof word === 'string' && word.length > 0)
+  } catch {
+    cancel()
+    return []
+  }
+}
