@@ -31,6 +31,12 @@ grammarly-hinglish/
   colab/      FastAPI model server + notebook to run in Google Colab
 ```
 
+## Model training
+
+Training code for both models (Qwen3-4B + LoRA grammar corrector, Qwen3-0.6B-Base fully fine-tuned
+autocomplete), their settings and results are in [`training/`](training/README.md). The trained
+models and datasets are on Google Drive (link in that README).
+
 ## API contract
 
 ### `POST /api/correct` (backend)
