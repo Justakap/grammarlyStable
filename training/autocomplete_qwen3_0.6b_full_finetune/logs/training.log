@@ -1,0 +1,300 @@
+[2026-10-04 05:09:01] ============================================================
+[2026-10-04 05:09:01] HINGLISH QWEN3-0.6B NEXT-TOKEN TRAINING
+[2026-10-04 05:09:01] Full-parameter causal language-model fine-tuning
+[2026-10-04 05:09:01] NO LoRA | NO n-grams
+[2026-10-04 05:09:01] ============================================================
+[2026-10-04 05:09:01] GPU: NVIDIA L40S
+[2026-10-04 05:09:01] BF16 supported: True
+[2026-10-04 05:09:01] AMP dtype: torch.bfloat16
+[2026-10-04 05:09:01] VRAM 0.00/47.38 GB (reserved 0.00 GB)
+[2026-10-04 05:09:01] RAM 24.99/503.07 GB
+[2026-10-04 05:09:01] Loading tokenizer...
+[2026-10-04 05:09:06] Tokenizer loaded.
+[2026-10-04 05:09:06] Downloading dataset: theguywithblacktie/hinglish-conversations / large
+[2026-10-04 05:09:10] Original train rows: 364,841
+[2026-10-04 05:09:10] Original test rows: 40,538
+[2026-10-04 05:09:10] Flattening each row into one continuous conversation paragraph...
+[2026-10-04 05:09:19] Train after split: 357,544
+[2026-10-04 05:09:19] Validation: 7,297
+[2026-10-04 05:09:19] Test (untouched public split): 40,538
+[2026-10-04 05:09:19] Saving processed paragraph datasets...
+[2026-10-04 05:09:30] Processed paragraph datasets saved.
+[2026-10-04 05:09:30] Tokenizing training set...
+[2026-10-04 05:10:25] Tokenizing validation set...
+[2026-10-04 05:10:28] Tokenizing test set...
+[2026-10-04 05:10:35] Saving tokenized datasets...
+[2026-10-04 05:10:35] Tokenized datasets saved.
+[2026-10-04 05:10:35] Train examples: 357,544
+[2026-10-04 05:10:35] Validation examples: 7,297
+[2026-10-04 05:10:35] Test examples: 40,538
+[2026-10-04 05:10:35] Batch size: 8
+[2026-10-04 05:10:35] Gradient accumulation: 4
+[2026-10-04 05:10:35] Effective batch size: 32
+[2026-10-04 05:13:56] ============================================================
+[2026-10-04 05:13:56] HINGLISH QWEN3-0.6B NEXT-TOKEN TRAINING
+[2026-10-04 05:13:56] Full-parameter causal language-model fine-tuning
+[2026-10-04 05:13:56] NO LoRA | NO n-grams
+[2026-10-04 05:13:56] ============================================================
+[2026-10-04 05:13:56] GPU: NVIDIA L40S
+[2026-10-04 05:13:56] BF16 supported: True
+[2026-10-04 05:13:56] AMP dtype: torch.bfloat16
+[2026-10-04 05:13:56] VRAM 0.00/47.38 GB (reserved 0.00 GB)
+[2026-10-04 05:13:56] RAM 25.16/503.07 GB
+[2026-10-04 05:13:56] Loading tokenizer...
+[2026-10-04 05:13:58] Tokenizer loaded.
+[2026-10-04 05:13:58] Found tokenized datasets on disk.
+[2026-10-04 05:13:58] Train examples: 357,544
+[2026-10-04 05:13:58] Validation examples: 7,297
+[2026-10-04 05:13:58] Test examples: 40,538
+[2026-10-04 05:13:58] Batch size: 8
+[2026-10-04 05:13:58] Gradient accumulation: 4
+[2026-10-04 05:13:58] Effective batch size: 32
+[2026-10-04 05:13:58] Batches per epoch: 44,693
+[2026-10-04 05:13:58] Optimizer steps per epoch: 11,174
+[2026-10-04 05:13:58] Total optimizer steps: 11,174
+[2026-10-04 05:13:58] Warmup steps: 335
+[2026-10-04 05:13:58] Loading base Qwen3-0.6B model...
+[2026-10-04 05:15:36] Total parameters: 596,049,920
+[2026-10-04 05:15:36] Trainable parameters: 596,049,920
+[2026-10-04 05:15:36] Trainable percentage: 100.00%
+[2026-10-04 05:15:36] No checkpoint found. Starting from the base model.
+[2026-10-04 05:15:36] ========== EPOCH 1/1 ==========
+[2026-10-04 05:16:37] HEARTBEAT | epoch 1/1 | step 76/11,174 (0.68%) | loss 3.9329 | lr 2.269e-06 | 1.259 steps/s | elapsed 0:01:00 | ETA 2:26:57 | VRAM 3.70/47.38 GB (reserved 43.93 GB) | RAM 26.27/503.07 GB
+[2026-10-04 05:17:37] HEARTBEAT | epoch 1/1 | step 155/11,174 (1.39%) | loss 3.7681 | lr 4.627e-06 | 1.284 steps/s | elapsed 0:02:00 | ETA 2:22:58 | VRAM 4.80/47.38 GB (reserved 43.93 GB) | RAM 26.37/503.07 GB
+[2026-10-04 05:18:37] HEARTBEAT | epoch 1/1 | step 235/11,174 (2.10%) | loss 3.5109 | lr 7.015e-06 | 1.299 steps/s | elapsed 0:03:00 | ETA 2:20:19 | VRAM 4.00/47.38 GB (reserved 43.93 GB) | RAM 26.26/503.07 GB
+[2026-10-04 05:19:37] HEARTBEAT | epoch 1/1 | step 316/11,174 (2.83%) | loss 3.3137 | lr 9.433e-06 | 1.311 steps/s | elapsed 0:04:00 | ETA 2:18:00 | VRAM 3.88/47.38 GB (reserved 43.93 GB) | RAM 26.22/503.07 GB
+[2026-10-04 05:20:38] HEARTBEAT | epoch 1/1 | step 393/11,174 (3.52%) | loss 3.1994 | lr 9.999e-06 | 1.303 steps/s | elapsed 0:05:01 | ETA 2:17:57 | VRAM 3.62/47.38 GB (reserved 43.93 GB) | RAM 26.27/503.07 GB
+[2026-10-04 05:21:39] HEARTBEAT | epoch 1/1 | step 476/11,174 (4.26%) | loss 3.1028 | lr 9.996e-06 | 1.313 steps/s | elapsed 0:06:02 | ETA 2:15:45 | VRAM 4.49/47.38 GB (reserved 43.93 GB) | RAM 26.26/503.07 GB
+[2026-10-04 05:22:39] HEARTBEAT | epoch 1/1 | step 556/11,174 (4.98%) | loss 3.0648 | lr 9.990e-06 | 1.315 steps/s | elapsed 0:07:02 | ETA 2:14:37 | VRAM 3.95/47.38 GB (reserved 43.93 GB) | RAM 28.94/503.07 GB
+[2026-10-04 05:23:39] HEARTBEAT | epoch 1/1 | step 637/11,174 (5.70%) | loss 3.0114 | lr 9.981e-06 | 1.318 steps/s | elapsed 0:08:03 | ETA 2:13:13 | VRAM 4.22/47.38 GB (reserved 43.93 GB) | RAM 29.18/503.07 GB
+[2026-10-04 05:24:40] HEARTBEAT | epoch 1/1 | step 713/11,174 (6.38%) | loss 2.9738 | lr 9.970e-06 | 1.312 steps/s | elapsed 0:09:03 | ETA 2:12:55 | VRAM 4.49/47.38 GB (reserved 43.93 GB) | RAM 29.18/503.07 GB
+[2026-10-04 05:25:40] HEARTBEAT | epoch 1/1 | step 795/11,174 (7.11%) | loss 2.9138 | lr 9.956e-06 | 1.317 steps/s | elapsed 0:10:03 | ETA 2:11:20 | VRAM 3.66/47.38 GB (reserved 43.93 GB) | RAM 29.05/503.07 GB
+[2026-10-04 05:26:40] HEARTBEAT | epoch 1/1 | step 872/11,174 (7.80%) | loss 2.8929 | lr 9.940e-06 | 1.313 steps/s | elapsed 0:11:04 | ETA 2:10:47 | VRAM 4.55/47.38 GB (reserved 43.93 GB) | RAM 29.46/503.07 GB
+[2026-10-04 05:27:41] HEARTBEAT | epoch 1/1 | step 948/11,174 (8.48%) | loss 2.8680 | lr 9.921e-06 | 1.309 steps/s | elapsed 0:12:04 | ETA 2:10:14 | VRAM 3.86/47.38 GB (reserved 43.93 GB) | RAM 28.96/503.07 GB
+[2026-10-04 05:28:41] HEARTBEAT | epoch 1/1 | step 1,025/11,174 (9.17%) | loss 2.8510 | lr 9.900e-06 | 1.306 steps/s | elapsed 0:13:04 | ETA 2:09:31 | VRAM 5.67/47.38 GB (reserved 43.93 GB) | RAM 29.15/503.07 GB
+[2026-10-04 05:29:42] HEARTBEAT | epoch 1/1 | step 1,097/11,174 (9.82%) | loss 2.8300 | lr 9.879e-06 | 1.297 steps/s | elapsed 0:14:05 | ETA 2:09:29 | VRAM 4.38/47.38 GB (reserved 43.93 GB) | RAM 28.79/503.07 GB
+[2026-10-04 05:30:43] HEARTBEAT | epoch 1/1 | step 1,177/11,174 (10.53%) | loss 2.8300 | lr 9.852e-06 | 1.298 steps/s | elapsed 0:15:06 | ETA 2:08:20 | VRAM 3.84/47.38 GB (reserved 43.93 GB) | RAM 29.52/503.07 GB
+[2026-10-04 05:31:43] HEARTBEAT | epoch 1/1 | step 1,258/11,174 (11.26%) | loss 2.8245 | lr 9.822e-06 | 1.301 steps/s | elapsed 0:16:07 | ETA 2:07:02 | VRAM 4.02/47.38 GB (reserved 43.93 GB) | RAM 27.23/503.07 GB
+[2026-10-04 05:32:43] HEARTBEAT | epoch 1/1 | step 1,341/11,174 (12.00%) | loss 2.7857 | lr 9.789e-06 | 1.306 steps/s | elapsed 0:17:07 | ETA 2:05:30 | VRAM 3.80/47.38 GB (reserved 43.93 GB) | RAM 26.09/503.07 GB
+[2026-10-04 05:33:44] HEARTBEAT | epoch 1/1 | step 1,419/11,174 (12.70%) | loss 2.7971 | lr 9.755e-06 | 1.305 steps/s | elapsed 0:18:07 | ETA 2:04:35 | VRAM 3.86/47.38 GB (reserved 43.93 GB) | RAM 27.18/503.07 GB
+[2026-10-04 05:34:44] HEARTBEAT | epoch 1/1 | step 1,496/11,174 (13.39%) | loss 2.7785 | lr 9.720e-06 | 1.303 steps/s | elapsed 0:19:08 | ETA 2:03:47 | VRAM 4.84/47.38 GB (reserved 43.93 GB) | RAM 27.16/503.07 GB
+[2026-10-04 05:35:45] HEARTBEAT | epoch 1/1 | step 1,578/11,174 (14.12%) | loss 2.7600 | lr 9.679e-06 | 1.306 steps/s | elapsed 0:20:08 | ETA 2:02:28 | VRAM 4.06/47.38 GB (reserved 43.93 GB) | RAM 27.27/503.07 GB
+[2026-10-04 05:36:45] HEARTBEAT | epoch 1/1 | step 1,659/11,174 (14.85%) | loss 2.7522 | lr 9.636e-06 | 1.308 steps/s | elapsed 0:21:08 | ETA 2:01:15 | VRAM 3.89/47.38 GB (reserved 43.93 GB) | RAM 27.37/503.07 GB
+[2026-10-04 05:37:45] HEARTBEAT | epoch 1/1 | step 1,741/11,174 (15.58%) | loss 2.7459 | lr 9.591e-06 | 1.310 steps/s | elapsed 0:22:08 | ETA 2:00:00 | VRAM 3.89/47.38 GB (reserved 43.93 GB) | RAM 27.39/503.07 GB
+[2026-10-04 05:38:46] HEARTBEAT | epoch 1/1 | step 1,821/11,174 (16.30%) | loss 2.7384 | lr 9.543e-06 | 1.310 steps/s | elapsed 0:23:09 | ETA 1:58:57 | VRAM 4.26/47.38 GB (reserved 43.93 GB) | RAM 27.62/503.07 GB
+[2026-10-04 05:39:46] HEARTBEAT | epoch 1/1 | step 1,900/11,174 (17.00%) | loss 2.7236 | lr 9.494e-06 | 1.311 steps/s | elapsed 0:24:09 | ETA 1:57:56 | VRAM 3.84/47.38 GB (reserved 43.93 GB) | RAM 27.63/503.07 GB
+[2026-10-04 05:40:46] HEARTBEAT | epoch 1/1 | step 1,978/11,174 (17.70%) | loss 2.7463 | lr 9.444e-06 | 1.310 steps/s | elapsed 0:25:10 | ETA 1:57:00 | VRAM 4.78/47.38 GB (reserved 43.93 GB) | RAM 27.50/503.07 GB
+[2026-10-04 05:41:05] Saving checkpoint at step 2,000...
+[2026-10-04 05:41:08] Checkpoint saved: outputs/qwen3-0.6b-hinglish-next-token/checkpoints/checkpoint-2000
+[2026-10-04 05:41:47] HEARTBEAT | epoch 1/1 | step 2,053/11,174 (18.37%) | loss 2.7314 | lr 9.393e-06 | 1.307 steps/s | elapsed 0:26:10 | ETA 1:56:18 | VRAM 3.80/47.38 GB (reserved 43.93 GB) | RAM 27.91/503.07 GB
+[2026-10-04 05:42:47] HEARTBEAT | epoch 1/1 | step 2,130/11,174 (19.06%) | loss 2.7301 | lr 9.338e-06 | 1.306 steps/s | elapsed 0:27:11 | ETA 1:55:25 | VRAM 3.88/47.38 GB (reserved 43.93 GB) | RAM 28.12/503.07 GB
+[2026-10-04 05:43:48] HEARTBEAT | epoch 1/1 | step 2,211/11,174 (19.79%) | loss 2.7142 | lr 9.279e-06 | 1.307 steps/s | elapsed 0:28:11 | ETA 1:54:16 | VRAM 3.70/47.38 GB (reserved 43.93 GB) | RAM 28.11/503.07 GB
+[2026-10-04 05:44:48] HEARTBEAT | epoch 1/1 | step 2,286/11,174 (20.46%) | loss 2.7306 | lr 9.222e-06 | 1.305 steps/s | elapsed 0:29:11 | ETA 1:53:31 | VRAM 4.29/47.38 GB (reserved 43.93 GB) | RAM 28.03/503.07 GB
+[2026-10-04 05:45:48] HEARTBEAT | epoch 1/1 | step 2,365/11,174 (21.17%) | loss 2.7108 | lr 9.159e-06 | 1.305 steps/s | elapsed 0:30:12 | ETA 1:52:29 | VRAM 4.28/47.38 GB (reserved 43.93 GB) | RAM 28.09/503.07 GB
+[2026-10-04 05:46:48] HEARTBEAT | epoch 1/1 | step 2,444/11,174 (21.87%) | loss 2.7196 | lr 9.095e-06 | 1.305 steps/s | elapsed 0:31:12 | ETA 1:51:27 | VRAM 4.37/47.38 GB (reserved 43.93 GB) | RAM 28.15/503.07 GB
+[2026-10-04 05:47:49] HEARTBEAT | epoch 1/1 | step 2,528/11,174 (22.62%) | loss 2.6790 | lr 9.024e-06 | 1.308 steps/s | elapsed 0:32:12 | ETA 1:50:10 | VRAM 5.00/47.38 GB (reserved 43.93 GB) | RAM 28.11/503.07 GB
+[2026-10-04 05:48:49] HEARTBEAT | epoch 1/1 | step 2,606/11,174 (23.32%) | loss 2.6890 | lr 8.955e-06 | 1.307 steps/s | elapsed 0:33:13 | ETA 1:49:13 | VRAM 4.87/47.38 GB (reserved 43.93 GB) | RAM 28.17/503.07 GB
+[2026-10-04 05:49:50] HEARTBEAT | epoch 1/1 | step 2,683/11,174 (24.01%) | loss 2.6818 | lr 8.886e-06 | 1.306 steps/s | elapsed 0:34:13 | ETA 1:48:19 | VRAM 3.88/47.38 GB (reserved 43.93 GB) | RAM 28.21/503.07 GB
+[2026-10-04 05:50:51] HEARTBEAT | epoch 1/1 | step 2,761/11,174 (24.71%) | loss 2.6944 | lr 8.814e-06 | 1.306 steps/s | elapsed 0:35:14 | ETA 1:47:22 | VRAM 4.17/47.38 GB (reserved 43.93 GB) | RAM 28.21/503.07 GB
+[2026-10-04 05:51:51] HEARTBEAT | epoch 1/1 | step 2,842/11,174 (25.43%) | loss 2.6871 | lr 8.737e-06 | 1.307 steps/s | elapsed 0:36:14 | ETA 1:46:16 | VRAM 3.77/47.38 GB (reserved 43.93 GB) | RAM 28.17/503.07 GB
+[2026-10-04 05:52:51] HEARTBEAT | epoch 1/1 | step 2,922/11,174 (26.15%) | loss 2.6773 | lr 8.659e-06 | 1.307 steps/s | elapsed 0:37:15 | ETA 1:45:12 | VRAM 3.66/47.38 GB (reserved 43.93 GB) | RAM 28.13/503.07 GB
+[2026-10-04 05:53:52] HEARTBEAT | epoch 1/1 | step 2,999/11,174 (26.84%) | loss 2.6933 | lr 8.582e-06 | 1.307 steps/s | elapsed 0:38:15 | ETA 1:44:17 | VRAM 4.42/47.38 GB (reserved 43.93 GB) | RAM 28.23/503.07 GB
+[2026-10-04 05:54:52] HEARTBEAT | epoch 1/1 | step 3,079/11,174 (27.56%) | loss 2.6797 | lr 8.500e-06 | 1.307 steps/s | elapsed 0:39:15 | ETA 1:43:12 | VRAM 3.61/47.38 GB (reserved 43.93 GB) | RAM 28.51/503.07 GB
+[2026-10-04 05:55:52] HEARTBEAT | epoch 1/1 | step 3,159/11,174 (28.27%) | loss 2.6592 | lr 8.417e-06 | 1.308 steps/s | elapsed 0:40:15 | ETA 1:42:09 | VRAM 3.75/47.38 GB (reserved 43.93 GB) | RAM 29.06/503.07 GB
+[2026-10-04 05:56:52] HEARTBEAT | epoch 1/1 | step 3,235/11,174 (28.95%) | loss 2.6883 | lr 8.335e-06 | 1.306 steps/s | elapsed 0:41:16 | ETA 1:41:16 | VRAM 3.80/47.38 GB (reserved 43.93 GB) | RAM 29.10/503.07 GB
+[2026-10-04 05:57:53] HEARTBEAT | epoch 1/1 | step 3,311/11,174 (29.63%) | loss 2.6795 | lr 8.252e-06 | 1.305 steps/s | elapsed 0:42:16 | ETA 1:40:23 | VRAM 3.99/47.38 GB (reserved 43.93 GB) | RAM 29.18/503.07 GB
+[2026-10-04 05:58:53] HEARTBEAT | epoch 1/1 | step 3,388/11,174 (30.32%) | loss 2.6779 | lr 8.167e-06 | 1.305 steps/s | elapsed 0:43:16 | ETA 1:39:26 | VRAM 3.84/47.38 GB (reserved 43.93 GB) | RAM 28.76/503.07 GB
+[2026-10-04 05:59:53] HEARTBEAT | epoch 1/1 | step 3,463/11,174 (30.99%) | loss 2.6661 | lr 8.082e-06 | 1.304 steps/s | elapsed 0:44:16 | ETA 1:38:35 | VRAM 3.57/47.38 GB (reserved 43.93 GB) | RAM 28.91/503.07 GB
+[2026-10-04 06:00:53] HEARTBEAT | epoch 1/1 | step 3,544/11,174 (31.72%) | loss 2.6510 | lr 7.989e-06 | 1.304 steps/s | elapsed 0:45:17 | ETA 1:37:29 | VRAM 3.71/47.38 GB (reserved 43.93 GB) | RAM 29.27/503.07 GB
+[2026-10-04 06:01:54] HEARTBEAT | epoch 1/1 | step 3,624/11,174 (32.43%) | loss 2.6706 | lr 7.895e-06 | 1.305 steps/s | elapsed 0:46:17 | ETA 1:36:26 | VRAM 3.99/47.38 GB (reserved 43.93 GB) | RAM 29.06/503.07 GB
+[2026-10-04 06:02:54] HEARTBEAT | epoch 1/1 | step 3,703/11,174 (33.14%) | loss 2.6498 | lr 7.801e-06 | 1.305 steps/s | elapsed 0:47:17 | ETA 1:35:25 | VRAM 5.11/47.38 GB (reserved 43.93 GB) | RAM 28.71/503.07 GB
+[2026-10-04 06:03:55] HEARTBEAT | epoch 1/1 | step 3,782/11,174 (33.85%) | loss 2.6684 | lr 7.705e-06 | 1.305 steps/s | elapsed 0:48:18 | ETA 1:34:25 | VRAM 3.64/47.38 GB (reserved 43.93 GB) | RAM 27.06/503.07 GB
+[2026-10-04 06:04:56] HEARTBEAT | epoch 1/1 | step 3,862/11,174 (34.56%) | loss 2.6482 | lr 7.607e-06 | 1.305 steps/s | elapsed 0:49:19 | ETA 1:33:23 | VRAM 4.38/47.38 GB (reserved 43.93 GB) | RAM 27.07/503.07 GB
+[2026-10-04 06:05:56] HEARTBEAT | epoch 1/1 | step 3,937/11,174 (35.23%) | loss 2.6834 | lr 7.514e-06 | 1.304 steps/s | elapsed 0:50:20 | ETA 1:32:31 | VRAM 4.15/47.38 GB (reserved 43.93 GB) | RAM 27.96/503.07 GB
+[2026-10-04 06:06:46] Saving checkpoint at step 4,000...
+[2026-10-04 06:06:49] Checkpoint saved: outputs/qwen3-0.6b-hinglish-next-token/checkpoints/checkpoint-4000
+[2026-10-04 06:06:56] HEARTBEAT | epoch 1/1 | step 4,010/11,174 (35.89%) | loss 2.6401 | lr 7.422e-06 | 1.302 steps/s | elapsed 0:51:20 | ETA 1:31:43 | VRAM 3.77/47.38 GB (reserved 43.93 GB) | RAM 28.17/503.07 GB
+[2026-10-04 06:07:57] HEARTBEAT | epoch 1/1 | step 4,087/11,174 (36.58%) | loss 2.6714 | lr 7.324e-06 | 1.301 steps/s | elapsed 0:52:20 | ETA 1:30:46 | VRAM 4.31/47.38 GB (reserved 43.93 GB) | RAM 28.17/503.07 GB
+[2026-10-04 06:08:57] HEARTBEAT | epoch 1/1 | step 4,165/11,174 (37.27%) | loss 2.6620 | lr 7.223e-06 | 1.301 steps/s | elapsed 0:53:20 | ETA 1:29:46 | VRAM 5.40/47.38 GB (reserved 43.93 GB) | RAM 28.19/503.07 GB
+[2026-10-04 06:09:58] HEARTBEAT | epoch 1/1 | step 4,240/11,174 (37.95%) | loss 2.6670 | lr 7.125e-06 | 1.300 steps/s | elapsed 0:54:21 | ETA 1:28:53 | VRAM 4.18/47.38 GB (reserved 43.93 GB) | RAM 28.21/503.07 GB
+[2026-10-04 06:10:58] HEARTBEAT | epoch 1/1 | step 4,316/11,174 (38.63%) | loss 2.6468 | lr 7.025e-06 | 1.299 steps/s | elapsed 0:55:22 | ETA 1:27:58 | VRAM 4.08/47.38 GB (reserved 43.93 GB) | RAM 28.36/503.07 GB
+[2026-10-04 06:11:59] HEARTBEAT | epoch 1/1 | step 4,397/11,174 (39.35%) | loss 2.6479 | lr 6.917e-06 | 1.300 steps/s | elapsed 0:56:22 | ETA 1:26:53 | VRAM 3.77/47.38 GB (reserved 43.93 GB) | RAM 28.97/503.07 GB
+[2026-10-04 06:12:59] HEARTBEAT | epoch 1/1 | step 4,480/11,174 (40.09%) | loss 2.6376 | lr 6.805e-06 | 1.301 steps/s | elapsed 0:57:22 | ETA 1:25:44 | VRAM 3.66/47.38 GB (reserved 43.93 GB) | RAM 28.74/503.07 GB
+[2026-10-04 06:14:00] HEARTBEAT | epoch 1/1 | step 4,558/11,174 (40.79%) | loss 2.6631 | lr 6.699e-06 | 1.301 steps/s | elapsed 0:58:23 | ETA 1:24:45 | VRAM 4.22/47.38 GB (reserved 43.93 GB) | RAM 28.82/503.07 GB
+[2026-10-04 06:15:00] HEARTBEAT | epoch 1/1 | step 4,637/11,174 (41.50%) | loss 2.6430 | lr 6.591e-06 | 1.301 steps/s | elapsed 0:59:23 | ETA 1:23:43 | VRAM 4.22/47.38 GB (reserved 43.93 GB) | RAM 28.78/503.07 GB
+[2026-10-04 06:16:01] HEARTBEAT | epoch 1/1 | step 4,717/11,174 (42.21%) | loss 2.6564 | lr 6.481e-06 | 1.301 steps/s | elapsed 1:00:24 | ETA 1:22:41 | VRAM 5.27/47.38 GB (reserved 43.93 GB) | RAM 28.73/503.07 GB
+[2026-10-04 06:17:01] HEARTBEAT | epoch 1/1 | step 4,796/11,174 (42.92%) | loss 2.6266 | lr 6.371e-06 | 1.302 steps/s | elapsed 1:01:24 | ETA 1:21:40 | VRAM 4.47/47.38 GB (reserved 43.93 GB) | RAM 28.73/503.07 GB
+[2026-10-04 06:18:02] HEARTBEAT | epoch 1/1 | step 4,876/11,174 (43.64%) | loss 2.6311 | lr 6.259e-06 | 1.302 steps/s | elapsed 1:02:25 | ETA 1:20:37 | VRAM 4.33/47.38 GB (reserved 43.93 GB) | RAM 28.80/503.07 GB
+[2026-10-04 06:19:02] HEARTBEAT | epoch 1/1 | step 4,951/11,174 (44.31%) | loss 2.6640 | lr 6.154e-06 | 1.301 steps/s | elapsed 1:03:25 | ETA 1:19:43 | VRAM 3.68/47.38 GB (reserved 43.93 GB) | RAM 28.74/503.07 GB
+[2026-10-04 06:20:02] HEARTBEAT | epoch 1/1 | step 5,029/11,174 (45.01%) | loss 2.6342 | lr 6.044e-06 | 1.301 steps/s | elapsed 1:04:25 | ETA 1:18:43 | VRAM 4.13/47.38 GB (reserved 43.93 GB) | RAM 28.75/503.07 GB
+[2026-10-04 06:21:03] HEARTBEAT | epoch 1/1 | step 5,108/11,174 (45.71%) | loss 2.6392 | lr 5.931e-06 | 1.301 steps/s | elapsed 1:05:26 | ETA 1:17:43 | VRAM 4.06/47.38 GB (reserved 43.93 GB) | RAM 28.54/503.07 GB
+[2026-10-04 06:22:03] HEARTBEAT | epoch 1/1 | step 5,187/11,174 (46.42%) | loss 2.6418 | lr 5.819e-06 | 1.301 steps/s | elapsed 1:06:26 | ETA 1:16:41 | VRAM 3.75/47.38 GB (reserved 43.93 GB) | RAM 28.55/503.07 GB
+[2026-10-04 06:23:04] HEARTBEAT | epoch 1/1 | step 5,264/11,174 (47.11%) | loss 2.6413 | lr 5.708e-06 | 1.301 steps/s | elapsed 1:07:27 | ETA 1:15:44 | VRAM 3.86/47.38 GB (reserved 43.93 GB) | RAM 28.56/503.07 GB
+[2026-10-04 06:24:04] HEARTBEAT | epoch 1/1 | step 5,345/11,174 (47.83%) | loss 2.6357 | lr 5.592e-06 | 1.301 steps/s | elapsed 1:08:28 | ETA 1:14:40 | VRAM 4.13/47.38 GB (reserved 43.93 GB) | RAM 28.53/503.07 GB
+[2026-10-04 06:25:05] HEARTBEAT | epoch 1/1 | step 5,427/11,174 (48.57%) | loss 2.6423 | lr 5.474e-06 | 1.302 steps/s | elapsed 1:09:28 | ETA 1:13:34 | VRAM 3.84/47.38 GB (reserved 43.93 GB) | RAM 28.61/503.07 GB
+[2026-10-04 06:26:05] HEARTBEAT | epoch 1/1 | step 5,508/11,174 (49.29%) | loss 2.6510 | lr 5.357e-06 | 1.303 steps/s | elapsed 1:10:28 | ETA 1:12:29 | VRAM 4.00/47.38 GB (reserved 43.93 GB) | RAM 28.68/503.07 GB
+[2026-10-04 06:27:05] HEARTBEAT | epoch 1/1 | step 5,584/11,174 (49.97%) | loss 2.6391 | lr 5.247e-06 | 1.302 steps/s | elapsed 1:11:28 | ETA 1:11:33 | VRAM 3.99/47.38 GB (reserved 43.93 GB) | RAM 29.60/503.07 GB
+[2026-10-04 06:28:05] HEARTBEAT | epoch 1/1 | step 5,667/11,174 (50.72%) | loss 2.6093 | lr 5.127e-06 | 1.303 steps/s | elapsed 1:12:28 | ETA 1:10:26 | VRAM 3.75/47.38 GB (reserved 43.93 GB) | RAM 29.48/503.07 GB
+[2026-10-04 06:29:05] HEARTBEAT | epoch 1/1 | step 5,749/11,174 (51.45%) | loss 2.6490 | lr 5.008e-06 | 1.304 steps/s | elapsed 1:13:29 | ETA 1:09:20 | VRAM 4.37/47.38 GB (reserved 43.93 GB) | RAM 29.47/503.07 GB
+[2026-10-04 06:30:06] HEARTBEAT | epoch 1/1 | step 5,837/11,174 (52.24%) | loss 2.6441 | lr 4.880e-06 | 1.306 steps/s | elapsed 1:14:29 | ETA 1:08:06 | VRAM 3.66/47.38 GB (reserved 43.93 GB) | RAM 29.53/503.07 GB
+[2026-10-04 06:31:06] HEARTBEAT | epoch 1/1 | step 5,912/11,174 (52.91%) | loss 2.6481 | lr 4.772e-06 | 1.305 steps/s | elapsed 1:15:29 | ETA 1:07:11 | VRAM 3.84/47.38 GB (reserved 43.93 GB) | RAM 29.43/503.07 GB
+[2026-10-04 06:32:06] HEARTBEAT | epoch 1/1 | step 5,990/11,174 (53.61%) | loss 2.6625 | lr 4.659e-06 | 1.305 steps/s | elapsed 1:16:30 | ETA 1:06:12 | VRAM 3.97/47.38 GB (reserved 43.93 GB) | RAM 29.28/503.07 GB
+[2026-10-04 06:32:14] Saving checkpoint at step 6,000...
+[2026-10-04 06:32:18] Deleting old checkpoint: outputs/qwen3-0.6b-hinglish-next-token/checkpoints/checkpoint-2000
+[2026-10-04 06:32:18] Checkpoint saved: outputs/qwen3-0.6b-hinglish-next-token/checkpoints/checkpoint-6000
+[2026-10-04 06:33:07] HEARTBEAT | epoch 1/1 | step 6,063/11,174 (54.26%) | loss 2.6356 | lr 4.554e-06 | 1.304 steps/s | elapsed 1:17:30 | ETA 1:05:20 | VRAM 4.40/47.38 GB (reserved 43.93 GB) | RAM 29.62/503.07 GB
+[2026-10-04 06:34:07] HEARTBEAT | epoch 1/1 | step 6,141/11,174 (54.96%) | loss 2.6547 | lr 4.441e-06 | 1.304 steps/s | elapsed 1:18:30 | ETA 1:04:20 | VRAM 3.70/47.38 GB (reserved 43.93 GB) | RAM 29.87/503.07 GB
+[2026-10-04 06:35:07] HEARTBEAT | epoch 1/1 | step 6,223/11,174 (55.69%) | loss 2.6279 | lr 4.323e-06 | 1.304 steps/s | elapsed 1:19:30 | ETA 1:03:15 | VRAM 3.97/47.38 GB (reserved 43.93 GB) | RAM 29.57/503.07 GB
+[2026-10-04 06:36:07] HEARTBEAT | epoch 1/1 | step 6,302/11,174 (56.40%) | loss 2.6303 | lr 4.210e-06 | 1.304 steps/s | elapsed 1:20:31 | ETA 1:02:14 | VRAM 4.62/47.38 GB (reserved 43.93 GB) | RAM 27.80/503.07 GB
+[2026-10-04 06:37:08] HEARTBEAT | epoch 1/1 | step 6,383/11,174 (57.12%) | loss 2.6312 | lr 4.094e-06 | 1.305 steps/s | elapsed 1:21:31 | ETA 1:01:11 | VRAM 3.70/47.38 GB (reserved 43.93 GB) | RAM 27.80/503.07 GB
+[2026-10-04 06:38:09] HEARTBEAT | epoch 1/1 | step 6,464/11,174 (57.85%) | loss 2.6439 | lr 3.979e-06 | 1.305 steps/s | elapsed 1:22:32 | ETA 1:00:08 | VRAM 4.55/47.38 GB (reserved 43.93 GB) | RAM 28.81/503.07 GB
+[2026-10-04 06:39:09] HEARTBEAT | epoch 1/1 | step 6,546/11,174 (58.58%) | loss 2.6437 | lr 3.863e-06 | 1.306 steps/s | elapsed 1:23:32 | ETA 0:59:04 | VRAM 3.57/47.38 GB (reserved 43.93 GB) | RAM 28.86/503.07 GB
+[2026-10-04 06:40:10] HEARTBEAT | epoch 1/1 | step 6,632/11,174 (59.35%) | loss 2.6427 | lr 3.742e-06 | 1.307 steps/s | elapsed 1:24:33 | ETA 0:57:54 | VRAM 3.71/47.38 GB (reserved 43.93 GB) | RAM 28.86/503.07 GB
+[2026-10-04 06:41:10] HEARTBEAT | epoch 1/1 | step 6,714/11,174 (60.09%) | loss 2.6432 | lr 3.627e-06 | 1.308 steps/s | elapsed 1:25:33 | ETA 0:56:50 | VRAM 3.75/47.38 GB (reserved 43.93 GB) | RAM 28.89/503.07 GB
+[2026-10-04 06:42:10] HEARTBEAT | epoch 1/1 | step 6,791/11,174 (60.78%) | loss 2.6440 | lr 3.520e-06 | 1.307 steps/s | elapsed 1:26:34 | ETA 0:55:52 | VRAM 4.22/47.38 GB (reserved 43.93 GB) | RAM 28.89/503.07 GB
+[2026-10-04 06:43:11] HEARTBEAT | epoch 1/1 | step 6,872/11,174 (61.50%) | loss 2.6301 | lr 3.409e-06 | 1.308 steps/s | elapsed 1:27:34 | ETA 0:54:49 | VRAM 3.59/47.38 GB (reserved 43.93 GB) | RAM 28.91/503.07 GB
+[2026-10-04 06:44:11] HEARTBEAT | epoch 1/1 | step 6,948/11,174 (62.18%) | loss 2.6312 | lr 3.305e-06 | 1.307 steps/s | elapsed 1:28:34 | ETA 0:53:52 | VRAM 3.80/47.38 GB (reserved 43.93 GB) | RAM 28.89/503.07 GB
+[2026-10-04 06:45:12] HEARTBEAT | epoch 1/1 | step 7,022/11,174 (62.84%) | loss 2.6407 | lr 3.204e-06 | 1.306 steps/s | elapsed 1:29:35 | ETA 0:52:58 | VRAM 5.67/47.38 GB (reserved 43.93 GB) | RAM 29.08/503.07 GB
+[2026-10-04 06:46:12] HEARTBEAT | epoch 1/1 | step 7,100/11,174 (63.54%) | loss 2.6511 | lr 3.099e-06 | 1.306 steps/s | elapsed 1:30:35 | ETA 0:51:59 | VRAM 5.07/47.38 GB (reserved 43.93 GB) | RAM 29.09/503.07 GB
+[2026-10-04 06:47:12] HEARTBEAT | epoch 1/1 | step 7,176/11,174 (64.22%) | loss 2.6355 | lr 2.998e-06 | 1.306 steps/s | elapsed 1:31:36 | ETA 0:51:02 | VRAM 3.88/47.38 GB (reserved 43.93 GB) | RAM 29.23/503.07 GB
+[2026-10-04 06:48:13] HEARTBEAT | epoch 1/1 | step 7,256/11,174 (64.94%) | loss 2.6372 | lr 2.892e-06 | 1.306 steps/s | elapsed 1:32:36 | ETA 0:50:00 | VRAM 3.66/47.38 GB (reserved 43.93 GB) | RAM 29.12/503.07 GB
+[2026-10-04 06:49:13] HEARTBEAT | epoch 1/1 | step 7,332/11,174 (65.62%) | loss 2.6437 | lr 2.793e-06 | 1.305 steps/s | elapsed 1:33:36 | ETA 0:49:03 | VRAM 4.20/47.38 GB (reserved 43.93 GB) | RAM 29.07/503.07 GB
+[2026-10-04 06:50:13] HEARTBEAT | epoch 1/1 | step 7,413/11,174 (66.34%) | loss 2.6384 | lr 2.688e-06 | 1.306 steps/s | elapsed 1:34:36 | ETA 0:47:59 | VRAM 4.29/47.38 GB (reserved 43.93 GB) | RAM 29.16/503.07 GB
+[2026-10-04 06:51:13] HEARTBEAT | epoch 1/1 | step 7,495/11,174 (67.08%) | loss 2.6302 | lr 2.583e-06 | 1.306 steps/s | elapsed 1:35:36 | ETA 0:46:56 | VRAM 3.59/47.38 GB (reserved 43.93 GB) | RAM 29.12/503.07 GB
+[2026-10-04 06:52:13] HEARTBEAT | epoch 1/1 | step 7,572/11,174 (67.76%) | loss 2.6155 | lr 2.486e-06 | 1.306 steps/s | elapsed 1:36:37 | ETA 0:45:57 | VRAM 4.66/47.38 GB (reserved 43.93 GB) | RAM 29.22/503.07 GB
+[2026-10-04 06:53:14] HEARTBEAT | epoch 1/1 | step 7,653/11,174 (68.49%) | loss 2.6507 | lr 2.385e-06 | 1.307 steps/s | elapsed 1:37:37 | ETA 0:44:54 | VRAM 4.09/47.38 GB (reserved 43.93 GB) | RAM 29.21/503.07 GB
+[2026-10-04 06:54:14] HEARTBEAT | epoch 1/1 | step 7,736/11,174 (69.23%) | loss 2.6472 | lr 2.284e-06 | 1.307 steps/s | elapsed 1:38:37 | ETA 0:43:49 | VRAM 3.79/47.38 GB (reserved 43.93 GB) | RAM 29.22/503.07 GB
+[2026-10-04 06:55:14] HEARTBEAT | epoch 1/1 | step 7,813/11,174 (69.92%) | loss 2.6499 | lr 2.191e-06 | 1.307 steps/s | elapsed 1:39:37 | ETA 0:42:51 | VRAM 4.47/47.38 GB (reserved 43.93 GB) | RAM 29.26/503.07 GB
+[2026-10-04 06:56:14] HEARTBEAT | epoch 1/1 | step 7,892/11,174 (70.63%) | loss 2.6338 | lr 2.097e-06 | 1.307 steps/s | elapsed 1:40:38 | ETA 0:41:51 | VRAM 3.91/47.38 GB (reserved 43.93 GB) | RAM 29.25/503.07 GB
+[2026-10-04 06:57:15] HEARTBEAT | epoch 1/1 | step 7,971/11,174 (71.34%) | loss 2.6537 | lr 2.004e-06 | 1.307 steps/s | elapsed 1:41:38 | ETA 0:40:50 | VRAM 4.20/47.38 GB (reserved 43.93 GB) | RAM 30.41/503.07 GB
+[2026-10-04 06:57:36] Saving checkpoint at step 8,000...
+[2026-10-04 06:57:39] Deleting old checkpoint: outputs/qwen3-0.6b-hinglish-next-token/checkpoints/checkpoint-4000
+[2026-10-04 06:57:39] Checkpoint saved: outputs/qwen3-0.6b-hinglish-next-token/checkpoints/checkpoint-8000
+[2026-10-04 06:58:15] HEARTBEAT | epoch 1/1 | step 8,044/11,174 (71.99%) | loss 2.6551 | lr 1.920e-06 | 1.306 steps/s | elapsed 1:42:38 | ETA 0:39:56 | VRAM 4.22/47.38 GB (reserved 43.93 GB) | RAM 30.72/503.07 GB
+[2026-10-04 06:59:15] HEARTBEAT | epoch 1/1 | step 8,124/11,174 (72.70%) | loss 2.6331 | lr 1.830e-06 | 1.306 steps/s | elapsed 1:43:39 | ETA 0:38:54 | VRAM 3.62/47.38 GB (reserved 43.93 GB) | RAM 31.10/503.07 GB
+[2026-10-04 07:00:16] HEARTBEAT | epoch 1/1 | step 8,200/11,174 (73.38%) | loss 2.6523 | lr 1.745e-06 | 1.306 steps/s | elapsed 1:44:39 | ETA 0:37:57 | VRAM 4.93/47.38 GB (reserved 43.93 GB) | RAM 31.25/503.07 GB
+[2026-10-04 07:01:16] HEARTBEAT | epoch 1/1 | step 8,276/11,174 (74.06%) | loss 2.6370 | lr 1.663e-06 | 1.305 steps/s | elapsed 1:45:39 | ETA 0:37:00 | VRAM 4.18/47.38 GB (reserved 43.93 GB) | RAM 31.84/503.07 GB
+[2026-10-04 07:02:16] HEARTBEAT | epoch 1/1 | step 8,356/11,174 (74.78%) | loss 2.6481 | lr 1.577e-06 | 1.306 steps/s | elapsed 1:46:40 | ETA 0:35:58 | VRAM 3.84/47.38 GB (reserved 43.93 GB) | RAM 31.38/503.07 GB
+[2026-10-04 07:03:17] HEARTBEAT | epoch 1/1 | step 8,433/11,174 (75.47%) | loss 2.6401 | lr 1.497e-06 | 1.305 steps/s | elapsed 1:47:40 | ETA 0:34:59 | VRAM 3.95/47.38 GB (reserved 43.93 GB) | RAM 31.89/503.07 GB
+[2026-10-04 07:04:17] HEARTBEAT | epoch 1/1 | step 8,509/11,174 (76.15%) | loss 2.6484 | lr 1.419e-06 | 1.305 steps/s | elapsed 1:48:40 | ETA 0:34:02 | VRAM 4.37/47.38 GB (reserved 43.93 GB) | RAM 31.82/503.07 GB
+[2026-10-04 07:05:17] HEARTBEAT | epoch 1/1 | step 8,591/11,174 (76.88%) | loss 2.6336 | lr 1.337e-06 | 1.305 steps/s | elapsed 1:49:41 | ETA 0:32:58 | VRAM 5.33/47.38 GB (reserved 43.93 GB) | RAM 31.34/503.07 GB
+[2026-10-04 07:06:17] HEARTBEAT | epoch 1/1 | step 8,670/11,174 (77.59%) | loss 2.6485 | lr 1.260e-06 | 1.306 steps/s | elapsed 1:50:41 | ETA 0:31:58 | VRAM 3.79/47.38 GB (reserved 43.93 GB) | RAM 32.66/503.07 GB
+[2026-10-04 07:07:18] HEARTBEAT | epoch 1/1 | step 8,744/11,174 (78.25%) | loss 2.6295 | lr 1.190e-06 | 1.305 steps/s | elapsed 1:51:41 | ETA 0:31:02 | VRAM 3.55/47.38 GB (reserved 43.93 GB) | RAM 34.34/503.07 GB
+[2026-10-04 07:08:19] HEARTBEAT | epoch 1/1 | step 8,825/11,174 (78.98%) | loss 2.6486 | lr 1.115e-06 | 1.305 steps/s | elapsed 1:52:42 | ETA 0:30:00 | VRAM 3.80/47.38 GB (reserved 43.93 GB) | RAM 33.84/503.07 GB
+[2026-10-04 07:09:19] HEARTBEAT | epoch 1/1 | step 8,912/11,174 (79.76%) | loss 2.6308 | lr 1.037e-06 | 1.306 steps/s | elapsed 1:53:42 | ETA 0:28:51 | VRAM 3.57/47.38 GB (reserved 43.93 GB) | RAM 35.16/503.07 GB
+[2026-10-04 07:10:20] HEARTBEAT | epoch 1/1 | step 8,993/11,174 (80.48%) | loss 2.6286 | lr 9.662e-07 | 1.306 steps/s | elapsed 1:54:43 | ETA 0:27:49 | VRAM 4.73/47.38 GB (reserved 43.93 GB) | RAM 36.21/503.07 GB
+[2026-10-04 07:11:20] HEARTBEAT | epoch 1/1 | step 9,075/11,174 (81.22%) | loss 2.6443 | lr 8.971e-07 | 1.307 steps/s | elapsed 1:55:43 | ETA 0:26:46 | VRAM 3.88/47.38 GB (reserved 43.93 GB) | RAM 36.21/503.07 GB
+[2026-10-04 07:12:21] HEARTBEAT | epoch 1/1 | step 9,154/11,174 (81.92%) | loss 2.6423 | lr 8.328e-07 | 1.307 steps/s | elapsed 1:56:44 | ETA 0:25:45 | VRAM 4.47/47.38 GB (reserved 43.93 GB) | RAM 36.38/503.07 GB
+[2026-10-04 07:13:21] HEARTBEAT | epoch 1/1 | step 9,233/11,174 (82.63%) | loss 2.6364 | lr 7.706e-07 | 1.307 steps/s | elapsed 1:57:44 | ETA 0:24:45 | VRAM 3.82/47.38 GB (reserved 43.93 GB) | RAM 36.34/503.07 GB
+[2026-10-04 07:14:21] HEARTBEAT | epoch 1/1 | step 9,310/11,174 (83.32%) | loss 2.6420 | lr 7.121e-07 | 1.307 steps/s | elapsed 1:58:44 | ETA 0:23:46 | VRAM 4.69/47.38 GB (reserved 43.93 GB) | RAM 36.33/503.07 GB
+[2026-10-04 07:15:22] HEARTBEAT | epoch 1/1 | step 9,390/11,174 (84.03%) | loss 2.6432 | lr 6.537e-07 | 1.307 steps/s | elapsed 1:59:45 | ETA 0:22:45 | VRAM 5.67/47.38 GB (reserved 43.93 GB) | RAM 36.34/503.07 GB
+[2026-10-04 07:16:22] HEARTBEAT | epoch 1/1 | step 9,469/11,174 (84.74%) | loss 2.6287 | lr 5.982e-07 | 1.307 steps/s | elapsed 2:00:45 | ETA 0:21:44 | VRAM 3.61/47.38 GB (reserved 43.93 GB) | RAM 36.40/503.07 GB
+[2026-10-04 07:17:23] HEARTBEAT | epoch 1/1 | step 9,545/11,174 (85.42%) | loss 2.6364 | lr 5.470e-07 | 1.306 steps/s | elapsed 2:01:46 | ETA 0:20:46 | VRAM 4.28/47.38 GB (reserved 43.93 GB) | RAM 36.22/503.07 GB
+[2026-10-04 07:18:23] HEARTBEAT | epoch 1/1 | step 9,625/11,174 (86.14%) | loss 2.6565 | lr 4.955e-07 | 1.307 steps/s | elapsed 2:02:46 | ETA 0:19:45 | VRAM 3.84/47.38 GB (reserved 43.93 GB) | RAM 35.75/503.07 GB
+[2026-10-04 07:19:23] HEARTBEAT | epoch 1/1 | step 9,704/11,174 (86.84%) | loss 2.6472 | lr 4.470e-07 | 1.307 steps/s | elapsed 2:03:47 | ETA 0:18:45 | VRAM 4.76/47.38 GB (reserved 43.93 GB) | RAM 35.67/503.07 GB
+[2026-10-04 07:20:24] HEARTBEAT | epoch 1/1 | step 9,782/11,174 (87.54%) | loss 2.6407 | lr 4.015e-07 | 1.306 steps/s | elapsed 2:04:48 | ETA 0:17:45 | VRAM 4.67/47.38 GB (reserved 43.93 GB) | RAM 35.79/503.07 GB
+[2026-10-04 07:21:24] HEARTBEAT | epoch 1/1 | step 9,859/11,174 (88.23%) | loss 2.6520 | lr 3.588e-07 | 1.306 steps/s | elapsed 2:05:48 | ETA 0:16:46 | VRAM 4.08/47.38 GB (reserved 43.93 GB) | RAM 35.76/503.07 GB
+[2026-10-04 07:22:25] HEARTBEAT | epoch 1/1 | step 9,936/11,174 (88.92%) | loss 2.6377 | lr 3.184e-07 | 1.306 steps/s | elapsed 2:06:48 | ETA 0:15:48 | VRAM 3.61/47.38 GB (reserved 43.93 GB) | RAM 35.85/503.07 GB
+[2026-10-04 07:23:13] Saving checkpoint at step 10,000...
+[2026-10-04 07:23:16] Deleting old checkpoint: outputs/qwen3-0.6b-hinglish-next-token/checkpoints/checkpoint-6000
+[2026-10-04 07:23:16] Checkpoint saved: outputs/qwen3-0.6b-hinglish-next-token/checkpoints/checkpoint-10000
+[2026-10-04 07:23:25] HEARTBEAT | epoch 1/1 | step 10,012/11,174 (89.60%) | loss 2.6459 | lr 2.809e-07 | 1.306 steps/s | elapsed 2:07:48 | ETA 0:14:50 | VRAM 4.66/47.38 GB (reserved 43.93 GB) | RAM 36.13/503.07 GB
+[2026-10-04 07:24:26] HEARTBEAT | epoch 1/1 | step 10,091/11,174 (90.31%) | loss 2.6399 | lr 2.443e-07 | 1.306 steps/s | elapsed 2:08:49 | ETA 0:13:49 | VRAM 4.18/47.38 GB (reserved 43.93 GB) | RAM 36.01/503.07 GB
+[2026-10-04 07:25:26] HEARTBEAT | epoch 1/1 | step 10,171/11,174 (91.02%) | loss 2.6439 | lr 2.098e-07 | 1.306 steps/s | elapsed 2:09:49 | ETA 0:12:48 | VRAM 4.84/47.38 GB (reserved 43.93 GB) | RAM 36.03/503.07 GB
+[2026-10-04 07:26:27] HEARTBEAT | epoch 1/1 | step 10,254/11,174 (91.77%) | loss 2.6464 | lr 1.767e-07 | 1.306 steps/s | elapsed 2:10:50 | ETA 0:11:44 | VRAM 3.71/47.38 GB (reserved 43.93 GB) | RAM 36.02/503.07 GB
+[2026-10-04 07:27:27] HEARTBEAT | epoch 1/1 | step 10,333/11,174 (92.47%) | loss 2.6568 | lr 1.478e-07 | 1.306 steps/s | elapsed 2:11:51 | ETA 0:10:43 | VRAM 3.59/47.38 GB (reserved 43.93 GB) | RAM 36.02/503.07 GB
+[2026-10-04 07:28:27] HEARTBEAT | epoch 1/1 | step 10,407/11,174 (93.14%) | loss 2.6467 | lr 1.230e-07 | 1.306 steps/s | elapsed 2:12:51 | ETA 0:09:47 | VRAM 4.11/47.38 GB (reserved 43.93 GB) | RAM 36.02/503.07 GB
+[2026-10-04 07:29:28] HEARTBEAT | epoch 1/1 | step 10,491/11,174 (93.89%) | loss 2.6300 | lr 9.765e-08 | 1.306 steps/s | elapsed 2:13:51 | ETA 0:08:42 | VRAM 3.71/47.38 GB (reserved 43.93 GB) | RAM 36.10/503.07 GB
+[2026-10-04 07:30:28] HEARTBEAT | epoch 1/1 | step 10,571/11,174 (94.60%) | loss 2.6488 | lr 7.617e-08 | 1.306 steps/s | elapsed 2:14:51 | ETA 0:07:41 | VRAM 3.82/47.38 GB (reserved 43.93 GB) | RAM 35.99/503.07 GB
+[2026-10-04 07:31:28] HEARTBEAT | epoch 1/1 | step 10,650/11,174 (95.31%) | loss 2.6574 | lr 5.756e-08 | 1.306 steps/s | elapsed 2:15:52 | ETA 0:06:41 | VRAM 3.66/47.38 GB (reserved 43.93 GB) | RAM 36.72/503.07 GB
+[2026-10-04 07:32:29] HEARTBEAT | epoch 1/1 | step 10,729/11,174 (96.02%) | loss 2.6399 | lr 4.153e-08 | 1.306 steps/s | elapsed 2:16:52 | ETA 0:05:40 | VRAM 4.00/47.38 GB (reserved 43.93 GB) | RAM 36.95/503.07 GB
+[2026-10-04 07:33:29] HEARTBEAT | epoch 1/1 | step 10,809/11,174 (96.73%) | loss 2.6356 | lr 2.795e-08 | 1.307 steps/s | elapsed 2:17:52 | ETA 0:04:39 | VRAM 4.66/47.38 GB (reserved 43.93 GB) | RAM 36.79/503.07 GB
+[2026-10-04 07:34:29] HEARTBEAT | epoch 1/1 | step 10,890/11,174 (97.46%) | loss 2.6366 | lr 1.693e-08 | 1.307 steps/s | elapsed 2:18:52 | ETA 0:03:37 | VRAM 3.86/47.38 GB (reserved 43.93 GB) | RAM 36.77/503.07 GB
+[2026-10-04 07:35:30] HEARTBEAT | epoch 1/1 | step 10,970/11,174 (98.17%) | loss 2.6512 | lr 8.738e-09 | 1.307 steps/s | elapsed 2:19:53 | ETA 0:02:36 | VRAM 4.18/47.38 GB (reserved 43.93 GB) | RAM 37.05/503.07 GB
+[2026-10-04 07:36:30] HEARTBEAT | epoch 1/1 | step 11,046/11,174 (98.85%) | loss 2.6449 | lr 3.441e-09 | 1.307 steps/s | elapsed 2:20:53 | ETA 0:01:37 | VRAM 4.76/47.38 GB (reserved 43.93 GB) | RAM 36.56/503.07 GB
+[2026-10-04 07:37:31] HEARTBEAT | epoch 1/1 | step 11,126/11,174 (99.57%) | loss 2.6066 | lr 4.839e-10 | 1.307 steps/s | elapsed 2:21:54 | ETA 0:00:36 | VRAM 4.60/47.38 GB (reserved 43.93 GB) | RAM 37.08/503.07 GB
+[2026-10-04 07:38:07] Epoch 1 finished in 2:22:31
+[2026-10-04 07:38:07] Training finished.
+[2026-10-04 07:38:07] Saving final model...
+[2026-10-04 07:38:09] Final model saved to: outputs/qwen3-0.6b-hinglish-next-token/final_model
+[2026-10-04 07:38:09] Starting VALIDATION evaluation...
+[2026-10-04 07:38:14] VALIDATION heartbeat | batch 100/913 | tokens 104,661 | 18,339 tok/s | VRAM 4.38/47.38 GB (reserved 43.93 GB) | RAM 36.09/503.07 GB
+[2026-10-04 07:38:19] VALIDATION heartbeat | batch 200/913 | tokens 205,100 | 19,595 tok/s | VRAM 5.02/47.38 GB (reserved 43.93 GB) | RAM 35.73/503.07 GB
+[2026-10-04 07:38:24] VALIDATION heartbeat | batch 300/913 | tokens 310,329 | 19,853 tok/s | VRAM 5.06/47.38 GB (reserved 43.93 GB) | RAM 36.07/503.07 GB
+[2026-10-04 07:38:29] VALIDATION heartbeat | batch 400/913 | tokens 415,168 | 20,211 tok/s | VRAM 4.48/47.38 GB (reserved 43.93 GB) | RAM 36.10/503.07 GB
+[2026-10-04 07:38:34] VALIDATION heartbeat | batch 500/913 | tokens 515,094 | 20,443 tok/s | VRAM 4.67/47.38 GB (reserved 43.93 GB) | RAM 35.99/503.07 GB
+[2026-10-04 07:38:39] VALIDATION heartbeat | batch 600/913 | tokens 613,931 | 20,448 tok/s | VRAM 4.77/47.38 GB (reserved 43.93 GB) | RAM 36.10/503.07 GB
+[2026-10-04 07:38:43] VALIDATION heartbeat | batch 700/913 | tokens 710,173 | 20,611 tok/s | VRAM 4.90/47.38 GB (reserved 43.93 GB) | RAM 36.01/503.07 GB
+[2026-10-04 07:38:48] VALIDATION heartbeat | batch 800/913 | tokens 804,933 | 20,663 tok/s | VRAM 5.32/47.38 GB (reserved 43.93 GB) | RAM 35.50/503.07 GB
+[2026-10-04 07:38:53] VALIDATION heartbeat | batch 900/913 | tokens 908,490 | 20,603 tok/s | VRAM 6.08/47.38 GB (reserved 43.93 GB) | RAM 35.77/503.07 GB
+[2026-10-04 07:38:53] VALIDATION COMPLETE | loss=2.658637 | perplexity=14.2768 | top1=46.41% | top3=63.26% | time=0:00:44
+[2026-10-04 07:38:53] Starting HELD-OUT TEST evaluation...
+[2026-10-04 07:38:58] HELD-OUT TEST heartbeat | batch 100/5,068 | tokens 98,293 | 20,970 tok/s | VRAM 5.21/47.38 GB (reserved 43.93 GB) | RAM 35.53/503.07 GB
+[2026-10-04 07:39:03] HELD-OUT TEST heartbeat | batch 200/5,068 | tokens 197,807 | 20,604 tok/s | VRAM 4.51/47.38 GB (reserved 43.93 GB) | RAM 36.04/503.07 GB
+[2026-10-04 07:39:07] HELD-OUT TEST heartbeat | batch 300/5,068 | tokens 294,063 | 21,032 tok/s | VRAM 5.14/47.38 GB (reserved 43.93 GB) | RAM 36.13/503.07 GB
+[2026-10-04 07:39:12] HELD-OUT TEST heartbeat | batch 400/5,068 | tokens 395,484 | 21,006 tok/s | VRAM 4.43/47.38 GB (reserved 43.93 GB) | RAM 35.65/503.07 GB
+[2026-10-04 07:39:17] HELD-OUT TEST heartbeat | batch 500/5,068 | tokens 499,716 | 21,149 tok/s | VRAM 4.58/47.38 GB (reserved 43.93 GB) | RAM 35.96/503.07 GB
+[2026-10-04 07:39:22] HELD-OUT TEST heartbeat | batch 600/5,068 | tokens 599,522 | 21,100 tok/s | VRAM 5.75/47.38 GB (reserved 43.93 GB) | RAM 35.80/503.07 GB
+[2026-10-04 07:39:27] HELD-OUT TEST heartbeat | batch 700/5,068 | tokens 697,661 | 20,937 tok/s | VRAM 5.68/47.38 GB (reserved 43.93 GB) | RAM 35.86/503.07 GB
+[2026-10-04 07:39:31] HELD-OUT TEST heartbeat | batch 800/5,068 | tokens 793,777 | 21,050 tok/s | VRAM 4.62/47.38 GB (reserved 43.93 GB) | RAM 35.87/503.07 GB
+[2026-10-04 07:39:36] HELD-OUT TEST heartbeat | batch 900/5,068 | tokens 893,306 | 21,048 tok/s | VRAM 4.48/47.38 GB (reserved 43.93 GB) | RAM 35.99/503.07 GB
+[2026-10-04 07:39:41] HELD-OUT TEST heartbeat | batch 1,000/5,068 | tokens 995,090 | 21,002 tok/s | VRAM 4.56/47.38 GB (reserved 43.93 GB) | RAM 36.08/503.07 GB
+[2026-10-04 07:39:46] HELD-OUT TEST heartbeat | batch 1,100/5,068 | tokens 1,094,060 | 20,968 tok/s | VRAM 4.32/47.38 GB (reserved 43.93 GB) | RAM 35.91/503.07 GB
+[2026-10-04 07:39:50] HELD-OUT TEST heartbeat | batch 1,200/5,068 | tokens 1,194,524 | 20,982 tok/s | VRAM 4.57/47.38 GB (reserved 43.93 GB) | RAM 36.00/503.07 GB
+[2026-10-04 07:39:55] HELD-OUT TEST heartbeat | batch 1,300/5,068 | tokens 1,293,394 | 21,070 tok/s | VRAM 4.87/47.38 GB (reserved 43.93 GB) | RAM 35.78/503.07 GB
+[2026-10-04 07:40:00] HELD-OUT TEST heartbeat | batch 1,400/5,068 | tokens 1,393,698 | 21,002 tok/s | VRAM 4.61/47.38 GB (reserved 43.93 GB) | RAM 34.50/503.07 GB
+[2026-10-04 07:40:04] HELD-OUT TEST heartbeat | batch 1,500/5,068 | tokens 1,494,743 | 21,065 tok/s | VRAM 5.21/47.38 GB (reserved 43.93 GB) | RAM 33.85/503.07 GB
+[2026-10-04 07:40:09] HELD-OUT TEST heartbeat | batch 1,600/5,068 | tokens 1,594,065 | 21,106 tok/s | VRAM 5.51/47.38 GB (reserved 43.93 GB) | RAM 33.85/503.07 GB
+[2026-10-04 07:40:14] HELD-OUT TEST heartbeat | batch 1,700/5,068 | tokens 1,692,387 | 21,099 tok/s | VRAM 4.77/47.38 GB (reserved 43.93 GB) | RAM 33.85/503.07 GB
+[2026-10-04 07:40:18] HELD-OUT TEST heartbeat | batch 1,800/5,068 | tokens 1,788,397 | 21,143 tok/s | VRAM 5.60/47.38 GB (reserved 43.93 GB) | RAM 33.85/503.07 GB
+[2026-10-04 07:40:23] HELD-OUT TEST heartbeat | batch 1,900/5,068 | tokens 1,890,320 | 21,138 tok/s | VRAM 5.01/47.38 GB (reserved 43.93 GB) | RAM 33.85/503.07 GB
+[2026-10-04 07:40:27] HELD-OUT TEST heartbeat | batch 2,000/5,068 | tokens 1,987,579 | 21,180 tok/s | VRAM 4.72/47.38 GB (reserved 43.93 GB) | RAM 33.85/503.07 GB
+[2026-10-04 07:40:31] HELD-OUT TEST heartbeat | batch 2,100/5,068 | tokens 2,080,942 | 21,229 tok/s | VRAM 4.69/47.38 GB (reserved 43.93 GB) | RAM 33.85/503.07 GB
+[2026-10-04 07:40:36] HELD-OUT TEST heartbeat | batch 2,200/5,068 | tokens 2,184,560 | 21,213 tok/s | VRAM 4.63/47.38 GB (reserved 43.93 GB) | RAM 33.85/503.07 GB
+[2026-10-04 07:40:41] HELD-OUT TEST heartbeat | batch 2,300/5,068 | tokens 2,281,880 | 21,199 tok/s | VRAM 5.93/47.38 GB (reserved 43.93 GB) | RAM 33.85/503.07 GB
+[2026-10-04 07:40:46] HELD-OUT TEST heartbeat | batch 2,400/5,068 | tokens 2,377,695 | 21,183 tok/s | VRAM 4.24/47.38 GB (reserved 43.93 GB) | RAM 33.85/503.07 GB
+[2026-10-04 07:40:50] HELD-OUT TEST heartbeat | batch 2,500/5,068 | tokens 2,477,859 | 21,203 tok/s | VRAM 4.30/47.38 GB (reserved 43.93 GB) | RAM 33.85/503.07 GB
+[2026-10-04 07:40:55] HELD-OUT TEST heartbeat | batch 2,600/5,068 | tokens 2,575,834 | 21,227 tok/s | VRAM 4.27/47.38 GB (reserved 43.93 GB) | RAM 33.85/503.07 GB
+[2026-10-04 07:40:59] HELD-OUT TEST heartbeat | batch 2,700/5,068 | tokens 2,676,514 | 21,215 tok/s | VRAM 5.13/47.38 GB (reserved 43.93 GB) | RAM 33.85/503.07 GB
+[2026-10-04 07:41:04] HELD-OUT TEST heartbeat | batch 2,800/5,068 | tokens 2,776,776 | 21,215 tok/s | VRAM 4.34/47.38 GB (reserved 43.93 GB) | RAM 33.85/503.07 GB
+[2026-10-04 07:41:09] HELD-OUT TEST heartbeat | batch 2,900/5,068 | tokens 2,874,211 | 21,225 tok/s | VRAM 4.55/47.38 GB (reserved 43.93 GB) | RAM 33.85/503.07 GB
+[2026-10-04 07:41:13] HELD-OUT TEST heartbeat | batch 3,000/5,068 | tokens 2,971,192 | 21,250 tok/s | VRAM 4.41/47.38 GB (reserved 43.93 GB) | RAM 33.85/503.07 GB
+[2026-10-04 07:41:18] HELD-OUT TEST heartbeat | batch 3,100/5,068 | tokens 3,074,016 | 21,238 tok/s | VRAM 6.62/47.38 GB (reserved 43.93 GB) | RAM 33.85/503.07 GB
+[2026-10-04 07:41:22] HELD-OUT TEST heartbeat | batch 3,200/5,068 | tokens 3,170,354 | 21,295 tok/s | VRAM 4.24/47.38 GB (reserved 43.93 GB) | RAM 33.85/503.07 GB
+[2026-10-04 07:41:27] HELD-OUT TEST heartbeat | batch 3,300/5,068 | tokens 3,272,103 | 21,321 tok/s | VRAM 4.71/47.38 GB (reserved 43.93 GB) | RAM 33.86/503.07 GB
+[2026-10-04 07:41:31] HELD-OUT TEST heartbeat | batch 3,400/5,068 | tokens 3,368,813 | 21,342 tok/s | VRAM 4.66/47.38 GB (reserved 43.93 GB) | RAM 33.85/503.07 GB
+[2026-10-04 07:41:35] HELD-OUT TEST heartbeat | batch 3,500/5,068 | tokens 3,463,758 | 21,371 tok/s | VRAM 5.37/47.38 GB (reserved 43.93 GB) | RAM 33.85/503.07 GB
+[2026-10-04 07:41:40] HELD-OUT TEST heartbeat | batch 3,600/5,068 | tokens 3,559,425 | 21,390 tok/s | VRAM 4.41/47.38 GB (reserved 43.93 GB) | RAM 33.86/503.07 GB
+[2026-10-04 07:41:44] HELD-OUT TEST heartbeat | batch 3,700/5,068 | tokens 3,652,344 | 21,429 tok/s | VRAM 5.53/47.38 GB (reserved 43.93 GB) | RAM 33.85/503.07 GB
+[2026-10-04 07:41:48] HELD-OUT TEST heartbeat | batch 3,800/5,068 | tokens 3,747,554 | 21,451 tok/s | VRAM 4.39/47.38 GB (reserved 43.93 GB) | RAM 33.86/503.07 GB
+[2026-10-04 07:41:52] HELD-OUT TEST heartbeat | batch 3,900/5,068 | tokens 3,842,403 | 21,482 tok/s | VRAM 4.29/47.38 GB (reserved 43.93 GB) | RAM 33.86/503.07 GB
+[2026-10-04 07:41:57] HELD-OUT TEST heartbeat | batch 4,000/5,068 | tokens 3,941,900 | 21,500 tok/s | VRAM 4.50/47.38 GB (reserved 43.93 GB) | RAM 35.64/503.07 GB
+[2026-10-04 07:42:01] HELD-OUT TEST heartbeat | batch 4,100/5,068 | tokens 4,043,521 | 21,497 tok/s | VRAM 4.39/47.38 GB (reserved 43.93 GB) | RAM 34.85/503.07 GB
+[2026-10-04 07:42:06] HELD-OUT TEST heartbeat | batch 4,200/5,068 | tokens 4,141,994 | 21,494 tok/s | VRAM 5.60/47.38 GB (reserved 43.93 GB) | RAM 34.77/503.07 GB
+[2026-10-04 07:42:11] HELD-OUT TEST heartbeat | batch 4,300/5,068 | tokens 4,244,754 | 21,482 tok/s | VRAM 5.21/47.38 GB (reserved 43.93 GB) | RAM 34.95/503.07 GB
+[2026-10-04 07:42:16] HELD-OUT TEST heartbeat | batch 4,400/5,068 | tokens 4,347,568 | 21,460 tok/s | VRAM 5.82/47.38 GB (reserved 43.93 GB) | RAM 34.80/503.07 GB
+[2026-10-04 07:42:21] HELD-OUT TEST heartbeat | batch 4,500/5,068 | tokens 4,450,295 | 21,441 tok/s | VRAM 4.56/47.38 GB (reserved 43.93 GB) | RAM 34.87/503.07 GB
+[2026-10-04 07:42:26] HELD-OUT TEST heartbeat | batch 4,600/5,068 | tokens 4,549,406 | 21,426 tok/s | VRAM 4.56/47.38 GB (reserved 43.93 GB) | RAM 34.86/503.07 GB
+[2026-10-04 07:42:30] HELD-OUT TEST heartbeat | batch 4,700/5,068 | tokens 4,645,574 | 21,449 tok/s | VRAM 4.37/47.38 GB (reserved 43.93 GB) | RAM 34.81/503.07 GB
+[2026-10-04 07:42:35] HELD-OUT TEST heartbeat | batch 4,800/5,068 | tokens 4,745,811 | 21,433 tok/s | VRAM 5.16/47.38 GB (reserved 43.93 GB) | RAM 34.88/503.07 GB
+[2026-10-04 07:42:40] HELD-OUT TEST heartbeat | batch 4,900/5,068 | tokens 4,848,457 | 21,410 tok/s | VRAM 4.28/47.38 GB (reserved 43.93 GB) | RAM 34.80/503.07 GB
+[2026-10-04 07:42:44] HELD-OUT TEST heartbeat | batch 5,000/5,068 | tokens 4,945,207 | 21,399 tok/s | VRAM 4.33/47.38 GB (reserved 43.93 GB) | RAM 34.85/503.07 GB
+[2026-10-04 07:42:47] HELD-OUT TEST COMPLETE | loss=2.662536 | perplexity=14.3326 | top1=46.35% | top3=63.20% | time=0:03:54
+[2026-10-04 07:42:47] ============================================================
+[2026-10-04 07:42:47] PIPELINE COMPLETE
+[2026-10-04 07:42:47] Model: Qwen/Qwen3-0.6B-Base
+[2026-10-04 07:42:47] Total parameters: 596,049,920
+[2026-10-04 07:42:47] Trainable parameters: 596,049,920
+[2026-10-04 07:42:47] Training time: 2:27:11
+[2026-10-04 07:42:47] Validation loss: 2.658637
+[2026-10-04 07:42:47] Validation perplexity: 14.2768
+[2026-10-04 07:42:47] Validation top-1: 46.41%
+[2026-10-04 07:42:47] Validation top-3: 63.26%
+[2026-10-04 07:42:47] Test loss: 2.662536
+[2026-10-04 07:42:47] Test perplexity: 14.3326
+[2026-10-04 07:42:47] Test top-1: 46.35%
+[2026-10-04 07:42:47] Test top-3: 63.20%
+[2026-10-04 07:42:47] Final model: outputs/qwen3-0.6b-hinglish-next-token/final_model
+[2026-10-04 07:42:47] VRAM 3.88/47.38 GB (reserved 43.93 GB)
+[2026-10-04 07:42:47] RAM 34.96/503.07 GB
+[2026-10-04 07:42:47] ============================================================

@@ -7,10 +7,12 @@ training/
 ├── README.md
 ├── requirements.txt
 ├── grammar_correction_qwen3_4b_lora/
-│   └── code/      train_4b.py, train_4b.sh
+│   ├── code/      train_4b.py, train_4b.sh
+│   └── logs/      qwen4b_out_6113.log, qwen4b_err_6113.log
 └── autocomplete_qwen3_0.6b_full_finetune/
     ├── code/      train_next_token.py, train_next_token.sh
-    └── results/   validation_metrics.json, test_metrics.json
+    ├── results/   validation_metrics.json, test_metrics.json
+    └── logs/      hinglish_next_6148.out, hinglish_next_6148.err, training.log
 ```
 
 ## Models and datasets (Google Drive)
