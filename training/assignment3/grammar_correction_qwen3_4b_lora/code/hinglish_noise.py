@@ -1,6 +1,9 @@
+import os
 import random
 import re
 from collections import Counter
+
+GRAMMAR_SCALE_WORDS = int(os.getenv("GRAMMAR_SCALE_WORDS", "0"))
 
 ARTICLES = ["a", "an", "the"]
 
@@ -465,6 +468,8 @@ def noisy_message(text, p_clean=0.15):
         return text, ["clean"]
     density = random.choices(list(DENSITY_WEIGHTS), weights=list(DENSITY_WEIGHTS.values()))[0]
     surface_p, g_max = DENSITIES[density]
+    if GRAMMAR_SCALE_WORDS > 0:
+        g_max *= max(1, int(len(text.split()) / GRAMMAR_SCALE_WORDS + 0.5))
     mode = random.choices(list(MODE_WEIGHTS), weights=list(MODE_WEIGHTS.values()))[0]
 
     for attempt_mode, p in ((mode, surface_p), ("surface", surface_p), ("surface", 0.30)):

@@ -54,7 +54,31 @@ if [[ " $RUNS " == *" E "* || " $RUNS " == *" F "* ]]; then
   fi
 fi
 
+A2ALL_DEP="$PREP_DEP"
+if [[ " $RUNS " == *" G "* ]]; then
+  if [ -f data_a3/train_a2_all.csv ] && [ "${SKIP_PREPARE:-0}" = "1" ]; then
+    echo "Using existing data_a3/train_a2_all.csv"
+  else
+    submit "$PREP_DEP" --export=ALL,OUT_FILE=train_a2_all.csv,MAX_A2_TRAIN=0 prepare_a2_full_a3.sh
+    A2ALL_DEP="afterok:$JOB"
+    echo "prepare A2 all data     job $JOB"
+  fi
+fi
+
 for RUN in $RUNS; do
+  if [ "$RUN" = "G" ]; then
+    submit "$A2ALL_DEP" --export=ALL,RUN=G1 train_4b_a3.sh
+    G1=$JOB
+    echo "train G1                job $G1"
+    submit "afterok:$G1" --export=ALL,RUN=G1 evaluate_a3.sh
+    echo "evaluate G1             job $JOB"
+    submit "afterok:$G1" --export=ALL,RUN=G2 train_4b_a3.sh
+    G2=$JOB
+    echo "train G2                job $G2"
+    submit "afterok:$G2" --export=ALL,RUN=G2 evaluate_a3.sh
+    echo "evaluate G2             job $JOB"
+    continue
+  fi
   TRAIN_DEP="$PREP_DEP"
   if [ "$RUN" = "E" ] || [ "$RUN" = "F" ]; then
     TRAIN_DEP="$A2F_DEP"

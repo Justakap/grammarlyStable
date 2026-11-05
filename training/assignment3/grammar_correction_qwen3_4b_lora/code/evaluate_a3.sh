@@ -23,6 +23,9 @@ fi
 
 RUN=${RUN:-D}
 A2_ADAPTER=${A2_ADAPTER:-qwen_4b_hinglish_lora}
+LONG_DATA=${LONG_DATA:-data_a3_full}
+TEST_SET=${TEST_SET:-original}
+export MAX_NEW_TOKENS=${MAX_NEW_TOKENS:-512}
 
 case "$RUN" in
   BASE)
@@ -33,12 +36,17 @@ case "$RUN" in
     export ADAPTER="$A2_ADAPTER"
     DEFAULT_PERSONA=0
     ;;
-  B|C|D|E|F)
+  B|C|D|E|F|G1|G2|G2_long)
     export ADAPTER="runs/run_$RUN/best"
     DEFAULT_PERSONA=1
     ;;
+  8B_long)
+    export ADAPTER="runs/run_$RUN/best"
+    export BASE_MODEL=${BASE_MODEL:-Qwen/Qwen3-8B}
+    DEFAULT_PERSONA=1
+    ;;
   *)
-    echo "Unknown RUN=$RUN. Use BASE, A, B, C, D, E or F."
+    echo "Unknown RUN=$RUN. Use BASE, A, B, C, D, E, F, G1, G2, G2_long or 8B_long."
     exit 1
     ;;
 esac
@@ -48,7 +56,7 @@ if [ -n "$ADAPTER" ] && [ ! -f "$ADAPTER/adapter_config.json" ]; then
   exit 1
 fi
 case "$RUN" in
-  B|C|D|E|F)
+  B|C|D|E|F|G1|G2|G2_long|8B_long)
     if [ ! -f "runs/run_$RUN/train_summary.json" ]; then
       echo "Training for run $RUN has not finished (runs/run_$RUN/train_summary.json missing). Evaluate after training ends."
       exit 1
@@ -58,6 +66,14 @@ esac
 if [ ! -f data_a3/test_indictalk.csv ]; then
   echo "data_a3/ not found. Run prepare_data_a3.sh first."
   exit 1
+fi
+if [ "$TEST_SET" = "long" ]; then
+  if [ ! -f "$LONG_DATA/test_indictalk.csv" ]; then
+    echo "$LONG_DATA/test_indictalk.csv not found. submit_final_long.sh builds it."
+    exit 1
+  fi
+  export TEST_FILES="$LONG_DATA/test_indictalk.csv"
+  export RESULTS_DIR="results_long"
 fi
 
 export USE_PERSONA=${USE_PERSONA:-$DEFAULT_PERSONA}
