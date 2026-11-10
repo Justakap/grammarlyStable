@@ -9,8 +9,8 @@ DATA_SETTINGS="MAX_WORDS=${MAX_WORDS:-120},MAX_INDICTALK_TRAIN=${MAX_INDICTALK_T
 
 for R in $RUNS; do
   case "$R" in
-    G2_long|8B_long) ;;
-    *) echo "Unknown run $R in RUNS. Use G2_long and/or 8B_long."; exit 1 ;;
+    G2_long|8B_long|8B_all) ;;
+    *) echo "Unknown run $R in RUNS. Use G2_long, 8B_long and/or 8B_all."; exit 1 ;;
   esac
   if [ -d "runs/run_$R" ]; then
     echo "runs/run_$R already exists. Remove or rename it before training $R again."
@@ -19,6 +19,10 @@ for R in $RUNS; do
 done
 if [[ " $RUNS " == *" G2_long "* ]] && [ ! -f runs/run_G1/best/adapter_config.json ]; then
   echo "runs/run_G1/best not found. G2_long continues from run G1."
+  exit 1
+fi
+if [[ " $RUNS " == *" 8B_all "* ]] && [ ! -f data_a3/train_a2_all.csv ]; then
+  echo "data_a3/train_a2_all.csv not found. 8B_all uses all Assignment 2 sentences, made for run G1 by prepare_a2_full_a3.sh."
   exit 1
 fi
 if [ ! -f data_a3/train_indictalk.csv ] || [ ! -f data_a3/test_indictalk.csv ]; then
@@ -54,7 +58,8 @@ print(f"G1 trained for {g1:.1f} hours.")
 cap = int(os.environ["MAX_TRAIN_EXAMPLES_8B"] or 0)
 stop = False
 for run, factor, time_var, share in (("G2_long", 1.2, "TRAIN_TIME_4B", 1.0),
-                                     ("8B_long", 2.6, "TRAIN_TIME_8B", min(1.0, cap / 417000) if cap > 0 else 1.0)):
+                                     ("8B_long", 2.6, "TRAIN_TIME_8B", min(1.0, cap / 430000) if cap > 0 else 1.0),
+                                     ("8B_all", 4.1, "TRAIN_TIME_8B", min(1.0, cap / 930000) if cap > 0 else 1.0)):
     if run not in os.environ["RUNS"].split():
         continue
     est = factor * g1 * share
@@ -62,8 +67,9 @@ for run, factor, time_var, share in (("G2_long", 1.2, "TRAIN_TIME_4B", 1.0),
     if est > 44 and not os.environ[time_var]:
         stop = True
         fix = f"{time_var}=3-00:00:00 (if the partition allows it: sinfo -p gpu -o '%P %l')"
-        if run == "8B_long":
-            fix += f", or MAX_TRAIN_EXAMPLES_8B={int(417000 * 40 / (factor * g1) / 1000) * 1000} to fit in about 40 hours"
+        if run != "G2_long":
+            pairs = 430000 if run == "8B_long" else 930000
+            fix += f", or MAX_TRAIN_EXAMPLES_8B={int(pairs * 40 / (factor * g1) / 1000) * 1000} to fit in about 40 hours"
         print(f"  That may not finish in time. Rerun with {fix}.")
 sys.exit(3 if stop else 0)
 EOF

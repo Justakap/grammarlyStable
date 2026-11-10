@@ -12,8 +12,10 @@ Edit F0.5 and over-correction on the two test sets (2,000 pairs each). All runs:
 | --- | --- | --- | --- | --- | --- |
 | A (Assignment 2 model) | 81.72 | 85.29 | 42.40 | 38.44 | 38.85 / 63.40 |
 | D | 91.85 | 89.90 | 1.94 | 6.31 | 70.75 / 76.75 |
-| G1 | 91.43 | **90.10** | 1.94 | 6.31 | 70.35 / 77.50 |
-| G2 | **92.08** | 89.88 | **1.29** | 6.31 | 71.75 / 76.90 |
+| G1 | 91.43 | 90.10 | 1.94 | 6.31 | 70.35 / 77.50 |
+| G2 | 92.08 | 89.88 | **1.29** | 6.31 | 71.75 / 76.90 |
+| G2_long | **93.43** | 89.55 | **1.29** | **6.01** | 75.30 / 76.10 |
+| 8B_all (Qwen3-8B) | 93.19 | **90.61** | 1.62 | **6.01** | 75.10 / 78.65 |
 | F | 90.27 | 87.61 | 1.94 | 6.61 | 68.35 / 73.85 |
 | Copy input unchanged | 0 | 0 | 0 | 0 | 15.45 / 16.65 |
 
@@ -30,7 +32,10 @@ Edit F0.5 and over-correction on the two test sets (2,000 pairs each). All runs:
 - Learning rate (5e-5 to 2e-4) and LoRA rank (16 to 64) do not matter in this range: all five sweep settings are
   within 0.17 points ([`results/sweep_results.md`](results/sweep_results.md)).
 - The best runs sit at about 92 (IndicTalk) and 90 (Assignment 2); recipe and hyperparameters are no longer the
-  bottleneck. The final runs (G2_long, 8B_long) therefore add data: whole IndicTalk messages up to 120 words.
+  bottleneck. The final runs (G2_long, 8B_all) therefore add data: whole IndicTalk messages up to 120 words.
+- More data helped on IndicTalk: G2_long reaches 93.43, +1.35 over G2, and stays close on Assignment 2 (89.55 vs
+  89.88). 8B_all (Qwen3-8B, one stage) scores 93.19 and 90.61: the best on Assignment 2 and the best mean F0.5
+  (91.90 vs 91.49 for G2_long).
 
 ## Files (`code/`)
 
@@ -40,11 +45,12 @@ Edit F0.5 and over-correction on the two test sets (2,000 pairs each). All runs:
 | `prompt_a3.py` | The training and inference prompt (with a `Persona:` line) |
 | `prepare_data_a3.py` / `prepare_data_a3.sh` | Builds `data_a3/` from IndicTalk (Hindi, Romanized only) and Assignment 2 data |
 | `prepare_a2_full_a3.py` / `prepare_a2_full_a3.sh` | Builds Assignment 2 sentences with the new errors: `train_a2_full.csv` (runs E, F) or `train_a2_all.csv` (run G1) |
-| `train_4b_a3.py` / `train_4b_a3.sh` | LoRA training; runs B, C, D, E, F, G1, G2, G2_long or 8B_long |
+| `train_4b_a3.py` / `train_4b_a3.sh` | LoRA training; runs B, C, D, E, F, G1, G2, G2_long, 8B_long or 8B_all |
 | `evaluate_grammar_a3.py` / `evaluate_a3.sh` | Generates corrections and computes all metrics; any run, on the original or the long-message test sets |
 | `summarize_results.py` | Builds `results/results_table.md` from every evaluation so far |
 | `submit_all_a3.sh` | Submits runs B-G and their evaluations in the right order using SLURM dependencies |
-| `submit_final_long.sh` | Final runs G2_long (4B) and 8B_long on whole messages up to 120 words, with their data step and evaluations |
+| `submit_final_long.sh` | Final runs G2_long (4B), 8B_long and 8B_all on whole messages up to 120 words, with their data step and evaluations |
+| `compare_runs.py` | Paired bootstrap comparison of runs on the same test sentences (edit F0.5 and over-correction, with 95% intervals); writes `results/significance_<runs>.md` |
 | `sweep_lr_rank/` | Learning rate and LoRA rank sweep on Data Mix D (see its README) |
 
 ## Before you start
@@ -92,6 +98,7 @@ from the first step of training.
 | G2 | G1's adapter | Data Mix D | 1e-4 | D's two-stage recipe, with the new errors in every stage |
 | G2_long | G1's adapter | Data Mix D rebuilt with whole messages up to 120 words (about 430,000 pairs) | 2e-4 | Final 4B model |
 | 8B_long | Qwen3-8B, new adapter | Same as G2_long | 2e-4 | Larger model, one stage from scratch |
+| 8B_all | Qwen3-8B, new adapter | Long IndicTalk messages (`data_a3_full/`) + all Assignment 2 sentences with the new errors (`data_a3/train_a2_all.csv`), about 930,000 pairs | 2e-4 | Final 8B model: one stage on the same sentences G2_long has seen through G1 |
 
 Every setting in `train_4b_a3.py` can be changed through an environment variable of the same name,
 e.g. `--export=ALL,RUN=D,MAX_TRAIN_EXAMPLES=50000` for a quick trial.
@@ -142,6 +149,24 @@ BATCH_SIZE_4B=8 GRAD_ACCUM_STEPS_4B=8 bash submit_final_long.sh   # if the 4B ru
 
 The first 8B job downloads Qwen3-8B (about 16 GB) into the Hugging Face cache. 8B_long is one stage from scratch
 while G2_long has G1's stage behind it, so their difference mixes model size and recipe.
+
+**8B_all** replaces 8B_long as the 8B run: G2_long has seen all Assignment 2 sentences through G1, while 8B_long
+sees only the 25% replay (about 107,000), so 8B_long would look weak on `test_a2` because of its data. 8B_all trains a
+fresh Qwen3-8B in one stage on the long IndicTalk messages plus all Assignment 2 sentences (about 930,000 pairs,
+batch 8 x 8, validation every 1,000 steps). The time check estimates it at about 4.1 times G1:
+
+```bash
+RUNS=8B_all COMPARE_RUNS=none bash submit_final_long.sh
+```
+
+Results on the long-message IndicTalk test set (2,000 whole messages up to 120 words; full table in
+[`results/results_long_table.md`](results/results_long_table.md)):
+
+| Run | Edit F0.5 | Over-correction | Exact match |
+| --- | --- | --- | --- |
+| G2 | 91.16 | 1.96 | 64.10 |
+| G2_long | 92.89 | 1.63 | 67.55 |
+| 8B_all (Qwen3-8B) | **93.15** | **0.98** | **67.90** |
 
 ## What the data step produces (`data_a3/`)
 
@@ -231,13 +256,13 @@ unchanged scores very high. `results/<run>/metrics_<test>.json` also breaks resu
 - `runs/run_<RUN>/train_summary.json`: trainable parameters, time, peak GPU memory, validation history.
 - `results/<RUN>/predictions_<test>.csv`: every input, reference and prediction.
 - `results/results_table.md`: all runs side by side.
-- `results_long/results_table.md`: G2_long, 8B_long and G2 on the long-message test set.
+- `results_long/results_table.md`: G2_long, the 8B runs and G2 on the long-message test set.
 
 ## Using the trained adapter
 
 Load `Qwen/Qwen3-4B`, attach `runs/run_G2/best` (or `runs/run_D/best`; they score the same) with
 `PeftModel.from_pretrained`, and send the prompt from `prompt_a3.py` (with
 `Persona: <friends|family|colleagues|experts|student_teacher|none>`), reading the output up to the end-of-text
-token. For the 8B model, load `Qwen/Qwen3-8B` and attach `runs/run_8B_long/best`. The app's
+token. For the 8B model, load `Qwen/Qwen3-8B` and attach `runs/run_8B_all/best`. The app's
 `colab/colab_server.py` currently loads `google/gemma-3-4b-it` with a system prompt, so it needs this change to use
 the fine-tuned model.

@@ -85,8 +85,20 @@ case "$RUN" in
     export GRAD_ACCUM_STEPS=${GRAD_ACCUM_STEPS:-8}
     export EVAL_BATCH_SIZE=${EVAL_BATCH_SIZE:-16}
     ;;
+  8B_all)
+    export BASE_MODEL=${BASE_MODEL:-Qwen/Qwen3-8B}
+    export INIT_ADAPTER=""
+    export TRAIN_FILES="$LONG_DATA/train_indictalk.csv,data_a3/train_a2_all.csv"
+    export VAL_FILE="$LONG_DATA/val.csv"
+    export LEARNING_RATE=${LEARNING_RATE:-2e-4}
+    export MAX_LENGTH=${MAX_LENGTH:-768}
+    export BATCH_SIZE=${BATCH_SIZE:-8}
+    export GRAD_ACCUM_STEPS=${GRAD_ACCUM_STEPS:-8}
+    export EVAL_BATCH_SIZE=${EVAL_BATCH_SIZE:-16}
+    export EVAL_EVERY=${EVAL_EVERY:-1000}
+    ;;
   *)
-    echo "Unknown RUN=$RUN. Use B, C, D, E, F, G1, G2, G2_long or 8B_long."
+    echo "Unknown RUN=$RUN. Use B, C, D, E, F, G1, G2, G2_long, 8B_long or 8B_all."
     exit 1
     ;;
 esac

@@ -41,6 +41,9 @@ Training code is in [`training/`](training/README.md), with one folder per assig
 - [`training/assignment3/`](training/assignment3/grammar_correction_qwen3_4b_lora/README.md): the grammar
   corrector trained further on IndicTalk persona data with improved Hinglish errors, the training runs compared,
   and results.
+- [`training/assignment3/next_word_prediction_qwen3_full_finetune/`](training/assignment3/next_word_prediction_qwen3_full_finetune/README.md):
+  the autocomplete model made persona-aware and trained on IndicTalk plus the Assignment 2 conversations
+  (Qwen3-0.6B-Base and 1.7B-Base), with word-level suggestion metrics and results.
 
 ## API contract
 

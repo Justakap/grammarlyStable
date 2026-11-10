@@ -40,13 +40,13 @@ case "$RUN" in
     export ADAPTER="runs/run_$RUN/best"
     DEFAULT_PERSONA=1
     ;;
-  8B_long)
+  8B_long|8B_all)
     export ADAPTER="runs/run_$RUN/best"
     export BASE_MODEL=${BASE_MODEL:-Qwen/Qwen3-8B}
     DEFAULT_PERSONA=1
     ;;
   *)
-    echo "Unknown RUN=$RUN. Use BASE, A, B, C, D, E, F, G1, G2, G2_long or 8B_long."
+    echo "Unknown RUN=$RUN. Use BASE, A, B, C, D, E, F, G1, G2, G2_long, 8B_long or 8B_all."
     exit 1
     ;;
 esac
@@ -56,7 +56,7 @@ if [ -n "$ADAPTER" ] && [ ! -f "$ADAPTER/adapter_config.json" ]; then
   exit 1
 fi
 case "$RUN" in
-  B|C|D|E|F|G1|G2|G2_long|8B_long)
+  B|C|D|E|F|G1|G2|G2_long|8B_long|8B_all)
     if [ ! -f "runs/run_$RUN/train_summary.json" ]; then
       echo "Training for run $RUN has not finished (runs/run_$RUN/train_summary.json missing). Evaluate after training ends."
       exit 1
