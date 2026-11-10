@@ -6,7 +6,7 @@ between them in code; Assignment 3 only starts from the trained Assignment 2 ada
 | Folder | Assignment | Models |
 | --- | --- | --- |
 | [`assignment2/`](assignment2/README.md) | Assignment 2 | Grammar correction (Qwen3-4B + LoRA) and autocomplete (Qwen3-0.6B-Base, full fine-tuning) |
-| [`assignment3/`](assignment3/grammar_correction_qwen3_4b_lora/README.md) | Assignment 3 | Grammar correction (Qwen3-4B + LoRA, and a Qwen3-8B run) with IndicTalk persona data, improved Hinglish errors and new metrics; [persona-aware next-word prediction](assignment3/next_word_prediction_qwen3_full_finetune/README.md) (Qwen3-0.6B-Base and 1.7B-Base, full fine-tuning) |
+| [`assignment3/`](assignment3/grammar_correction_qwen3_4b_lora/README.md) | Assignment 3 | Grammar correction (Qwen3-4B + LoRA, and a Qwen3-8B run) with IndicTalk persona data, improved Hinglish errors and new metrics; [persona-aware next-word prediction](assignment3/next_word_prediction_qwen3_full_finetune/README.md) (Qwen3-0.6B-Base and 1.7B-Base, full fine-tuning); [Hinglish sensitivity score](assignment3/sensitivity_score_muril/README.md) (MuRIL, compared with Qwen3-0.6B) |
 
 ```
 training/
@@ -27,8 +27,12 @@ training/
     │   ├── code/      data preparation, training, evaluation and SLURM scripts, requirements.txt
     │   │   └── sweep_lr_rank/   learning rate and LoRA rank sweep
     │   └── results/   results_table.md, results_long_table.md, sweep_results.md
-    └── next_word_prediction_qwen3_full_finetune/
+    ├── next_word_prediction_qwen3_full_finetune/
+    │   ├── README.md
+    │   ├── code/      data preparation, training, evaluation and SLURM scripts
+    │   └── results/   results_table.md, all_results.csv
+    └── sensitivity_score_muril/
         ├── README.md
-        ├── code/      data preparation, training, evaluation and SLURM scripts
-        └── results/   results_table.md, all_results.csv
+        ├── code/      data preparation, training, evaluation, scoring and SLURM scripts
+        └── results/   results_table.md
 ```
