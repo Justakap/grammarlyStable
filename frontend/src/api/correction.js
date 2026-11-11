@@ -25,7 +25,7 @@ function withTimeout(ms) {
  * Sends Hinglish text to our backend for correction.
  * Throws an Error with a user-friendly message on any failure.
  */
-export async function correctText(text) {
+export async function correctText(text, persona = 'none') {
   const { signal, cancel } = withTimeout(30000)
 
   let response
@@ -33,7 +33,7 @@ export async function correctText(text) {
     response = await fetch(`${BASE}/api/correct`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ text }),
+      body: JSON.stringify({ text, persona }),
       signal,
     })
   } catch (err) {
@@ -89,14 +89,14 @@ export async function getModelStatus(service = 'correct') {
  * Never throws — resolves to [] on any failure, so a flaky prediction
  * model never disrupts typing.
  */
-export async function predictNextWords(text) {
+export async function predictNextWords(text, persona = 'none') {
   const { signal, cancel } = withTimeout(8000)
 
   try {
     const response = await fetch(`${BASE}/api/predict`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ text }),
+      body: JSON.stringify({ text, persona }),
       signal,
     })
     cancel()

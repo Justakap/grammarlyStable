@@ -7,7 +7,7 @@ import { getCaretOffset, setCaretOffset } from '../utils/caret'
 const CHECK_DEBOUNCE_MS = 900
 const SENS_DEBOUNCE_MS = 700
 
-export default function Editor({ value, onChange, onClear }) {
+export default function Editor({ value, onChange, onClear, persona = 'none' }) {
   const charCount = value.length
   const wordCount = value.trim() === '' ? 0 : value.trim().split(/\s+/).length
 
@@ -34,7 +34,7 @@ export default function Editor({ value, onChange, onClear }) {
     }
     const requestId = ++checkRequestIdRef.current
     setChecking(true)
-    correctText(trimmed)
+    correctText(trimmed, persona)
       .then((corrected) => {
         if (checkRequestIdRef.current !== requestId) return
         setIssues(diffWords(text, corrected))
@@ -45,7 +45,7 @@ export default function Editor({ value, onChange, onClear }) {
       .finally(() => {
         if (checkRequestIdRef.current === requestId) setChecking(false)
       })
-  }, [])
+  }, [persona])
 
   const runSensitivity = useCallback((text) => {
     const trimmed = text.trim()
@@ -75,6 +75,24 @@ export default function Editor({ value, onChange, onClear }) {
     }
   }, [])
 
+  // Re-check the current text when the persona changes (not on first render).
+  const valueRef = useRef(value)
+  const firstRenderRef = useRef(true)
+  useEffect(() => {
+    valueRef.current = value
+  }, [value])
+  useEffect(() => {
+    if (firstRenderRef.current) {
+      firstRenderRef.current = false
+      return
+    }
+    setSuggestions([])
+    if (valueRef.current.trim()) {
+      clearTimeout(checkTimerRef.current)
+      runCheck(valueRef.current)
+    }
+  }, [persona, runCheck])
+
   function scheduleCheck(text) {
     clearTimeout(checkTimerRef.current)
     checkTimerRef.current = setTimeout(() => runCheck(text), CHECK_DEBOUNCE_MS)
@@ -82,7 +100,7 @@ export default function Editor({ value, onChange, onClear }) {
 
   async function fetchSuggestions(text) {
     const requestId = ++predictRequestIdRef.current
-    const predictions = await predictNextWords(text)
+    const predictions = await predictNextWords(text, persona)
     if (predictRequestIdRef.current !== requestId) return
     setSuggestions(predictions)
   }
