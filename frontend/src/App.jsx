@@ -1,19 +1,21 @@
 import { useEffect, useState } from 'react'
 import Header from './components/Header'
 import Editor from './components/Editor'
-import PersonaSelect from './components/PersonaSelect'
+import WritingStyleSelect from './components/WritingStyleSelect'
 import ModelStatus from './components/ModelStatus'
 import { getModelStatus } from './api/correction'
+import { DEFAULT_STYLE, isValidStyle, styleToPersona } from './utils/writingStyles'
 import './App.css'
 
 const STATUS_POLL_MS = 20000
-const PERSONA_KEY = 'hinglish-persona'
+const STYLE_KEY = 'hinglish-writing-style'
 
-function loadPersona() {
+function loadStyle() {
   try {
-    return localStorage.getItem(PERSONA_KEY) || 'none'
+    const saved = localStorage.getItem(STYLE_KEY)
+    return isValidStyle(saved) ? saved : DEFAULT_STYLE
   } catch {
-    return 'none'
+    return DEFAULT_STYLE
   }
 }
 
@@ -22,12 +24,12 @@ export default function App() {
   const [correctState, setCorrectState] = useState('connecting')
   const [predictState, setPredictState] = useState('connecting')
   const [sensitivityState, setSensitivityState] = useState('connecting')
-  const [persona, setPersona] = useState(loadPersona)
+  const [style, setStyle] = useState(loadStyle)
 
-  function handlePersonaChange(next) {
-    setPersona(next)
+  function handleStyleChange(next) {
+    setStyle(next)
     try {
-      localStorage.setItem(PERSONA_KEY, next)
+      localStorage.setItem(STYLE_KEY, next)
     } catch {
       // Remembering the choice is a convenience only.
     }
@@ -61,9 +63,9 @@ export default function App() {
       <div className="app-container">
         <Header />
 
-        <PersonaSelect value={persona} onChange={handlePersonaChange} />
+        <WritingStyleSelect value={style} onChange={handleStyleChange} />
 
-        <Editor value={text} onChange={setText} onClear={() => setText('')} persona={persona} />
+        <Editor value={text} onChange={setText} onClear={() => setText('')} persona={styleToPersona(style)} />
 
         <footer className="app-footer">
           <ModelStatus label="Correction" state={correctState} />
