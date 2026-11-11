@@ -109,3 +109,29 @@ export async function predictNextWords(text) {
     return []
   }
 }
+
+/**
+ * Scores how sensitive/offensive the text is (0 safe - 100 offensive).
+ * Never throws — resolves to null on any failure, so tone checking never
+ * disrupts typing.
+ */
+export async function scoreSensitivity(text) {
+  const { signal, cancel } = withTimeout(10000)
+
+  try {
+    const response = await fetch(`${BASE}/api/sensitivity`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ text }),
+      signal,
+    })
+    cancel()
+    if (!response.ok) return null
+    const data = await parseJsonSafe(response)
+    if (!data || typeof data.score !== 'number' || typeof data.band !== 'string') return null
+    return { score: data.score, band: data.band }
+  } catch {
+    cancel()
+    return null
+  }
+}

@@ -230,3 +230,78 @@
     justify-content: flex-end;
   }
 }
+
+/* Sensitivity meter */
+.sens {
+  --sens-color: var(--color-success);
+  --sens-bg: var(--color-success-bg);
+  margin-top: 14px;
+  padding: 12px 14px;
+  border-radius: var(--radius-md);
+  background: var(--sens-bg);
+  border: 1px solid color-mix(in srgb, var(--sens-color) 30%, transparent);
+}
+
+.sens--sensitive {
+  --sens-color: #b7791f;
+  --sens-bg: #fff6e0;
+}
+
+.sens--offensive {
+  --sens-color: var(--color-danger);
+  --sens-bg: var(--color-danger-bg);
+}
+
+.sens-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.875rem;
+}
+
+.sens-title {
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.sens-badge {
+  background: var(--sens-color);
+  color: #fff;
+  border-radius: 999px;
+  padding: 2px 10px;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.sens-score {
+  color: var(--color-text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.sens-updating {
+  margin-left: auto;
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+.sens-track {
+  margin-top: 10px;
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(16, 20, 40, 0.08);
+  overflow: hidden;
+}
+
+.sens-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: var(--sens-color);
+  transition: width 0.35s ease, background-color 0.35s ease;
+}
+
+.sens-hint {
+  margin: 10px 0 0;
+  font-size: 0.875rem;
+  color: var(--sens-color);
+  font-weight: 600;
+}
