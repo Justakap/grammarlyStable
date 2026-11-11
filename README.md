@@ -33,9 +33,20 @@ grammarly-hinglish/
 
 ## Model training
 
-Training code for both models (Qwen3-4B + LoRA grammar corrector, Qwen3-0.6B-Base fully fine-tuned
-autocomplete), their settings and results are in [`training/`](training/README.md). The trained
-models and datasets are on Google Drive (link in that README).
+Training code is in [`training/`](training/README.md), with one folder per assignment:
+
+- [`training/assignment2/`](training/assignment2/README.md): the Qwen3-4B + LoRA grammar corrector and the
+  Qwen3-0.6B-Base fully fine-tuned autocomplete model. The trained models and datasets are on Google Drive
+  (link in that README).
+- [`training/assignment3/`](training/assignment3/grammar_correction_qwen3_4b_lora/README.md): the grammar
+  corrector trained further on IndicTalk persona data with improved Hinglish errors, the training runs compared,
+  and results.
+- [`training/assignment3/next_word_prediction_qwen3_full_finetune/`](training/assignment3/next_word_prediction_qwen3_full_finetune/README.md):
+  the autocomplete model made persona-aware and trained on IndicTalk plus the Assignment 2 conversations
+  (Qwen3-0.6B-Base and 1.7B-Base), with word-level suggestion metrics and results.
+- [`training/assignment3/sensitivity_score_muril/`](training/assignment3/sensitivity_score_muril/README.md):
+  a 0-100% sensitivity score for Hinglish messages (MuRIL, compared with Qwen3-0.6B), trained on TRAC-1
+  aggression labels plus safe chat, with results and limitations.
 
 ## API contract
 
