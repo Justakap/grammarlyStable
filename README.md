@@ -92,7 +92,7 @@ Render's does not, so the frontend always points at Render and never has to chan
 4. Set environment variables in Render's dashboard (**never** commit these):
    - `BACKEND_REGISTRATION_TOKEN` — a long random secret (Colab must send this exact value)
    - `FRONTEND_ORIGIN` — your deployed frontend's URL (comma-separate multiple, e.g. local + prod)
-5. Deploy. Render gives you a stable URL like `https://hinglish-grammarly-backend.onrender.com` —
+5. Deploy. Render gives you a stable URL like `https://grammarlystable-1.onrender.com` —
    this is the `BACKEND_URL` the Colab notebook registers against, and the `VITE_API_URL` the frontend calls.
 
 Note: Render's free tier spins down on idle, so the first request after inactivity is slow —
@@ -104,7 +104,7 @@ that's expected, not a bug.
 2. Upload `colab/colab_server.py` and `colab/register.py` into the Colab filesystem
    (left sidebar → Files → upload), or mount Drive and adjust paths.
 3. In Colab's **Secrets** panel (key icon in the left sidebar), add:
-   - `BACKEND_URL` — your Render backend URL from step 1b (e.g. `https://hinglish-grammarly-backend.onrender.com`)
+   - `BACKEND_URL` — your Render backend URL from step 1b (e.g. `https://grammarlystable-1.onrender.com`)
    - `BACKEND_REGISTRATION_TOKEN` — must match the value set on Render
    - `NGROK_AUTH_TOKEN` — from https://dashboard.ngrok.com/get-started/your-authtoken
    - `MODEL_NAME` (optional, defaults to `google/gemma-3-4b-it`)
