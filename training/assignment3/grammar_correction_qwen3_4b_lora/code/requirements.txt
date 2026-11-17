@@ -1,0 +1,9 @@
+torch>=2.7
+transformers>=4.51
+datasets
+peft
+accelerate
+pandas
+sentencepiece
+sacrebleu
+sentence-transformers
