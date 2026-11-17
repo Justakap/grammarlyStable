@@ -1,12 +1,13 @@
 import { Router } from 'express'
 import { getColabUrl } from '../lib/colabStore.js'
+import { parsePersona, PERSONA_ERROR } from '../lib/persona.js'
 
 const router = Router()
 
 const COLAB_TIMEOUT_MS = Number(process.env.COLAB_REQUEST_TIMEOUT_MS || 25000)
 
 router.post('/predict', async (req, res) => {
-  const { text } = req.body || {}
+  const { text, persona, context } = req.body || {}
 
   if (typeof text !== 'string' || text.trim().length === 0) {
     return res.status(400).json({ error: 'Please provide a non-empty "text" field.' })
@@ -15,6 +16,17 @@ router.post('/predict', async (req, res) => {
   if (text.length > 2000) {
     return res.status(400).json({ error: 'Text is too long. Please shorten your sentence.' })
   }
+
+  const personaValue = parsePersona(persona)
+  if (personaValue === null) {
+    return res.status(400).json({ error: PERSONA_ERROR })
+  }
+
+  // Optional earlier messages of the chat, used by the model as context.
+  if (context !== undefined && (!Array.isArray(context) || context.some((m) => typeof m !== 'string'))) {
+    return res.status(400).json({ error: 'If provided, "context" must be an array of strings.' })
+  }
+  const contextValue = (context || []).slice(-20).map((m) => m.slice(0, 1000))
 
   const colabUrl = getColabUrl('predict')
   if (!colabUrl) {
@@ -33,7 +45,7 @@ router.post('/predict', async (req, res) => {
     const upstream = await fetch(`${colabUrl.replace(/\/+$/, '')}/predict`, {
       method: 'POST',
       headers,
-      body: JSON.stringify({ text: text.trim() }),
+      body: JSON.stringify({ text: text.trim().slice(0, 1000), persona: personaValue, context: contextValue }),
       signal: controller.signal,
     })
 

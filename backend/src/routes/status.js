@@ -7,11 +7,11 @@ const HEALTH_TIMEOUT_MS = 4000
 
 // Reports whether a Colab endpoint is registered and currently reachable.
 // Never exposes the actual URL to the caller.
-// ?service=correct (default) or ?service=predict
+// ?service=correct (default), ?service=predict or ?service=sensitivity
 router.get('/model/status', async (req, res) => {
   const service = req.query.service
   if (service !== undefined && !isValidService(service)) {
-    return res.status(400).json({ error: 'If provided, "service" must be "correct" or "predict".' })
+    return res.status(400).json({ error: 'If provided, "service" must be "correct", "predict" or "sensitivity".' })
   }
 
   const colabUrl = getColabUrl(service)

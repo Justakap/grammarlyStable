@@ -1,13 +1,14 @@
 // In-memory store for the currently active Colab endpoint(s).
 // Each Colab runtime registers its URL under a service name ("correct",
-// "predict", ...), replacing any previous URL for that service only.
+// "predict", "sensitivity", ...), replacing any previous URL for that service only.
 
-const VALID_SERVICES = new Set(['correct', 'predict'])
+const VALID_SERVICES = new Set(['correct', 'predict', 'sensitivity'])
 const DEFAULT_SERVICE = 'correct'
 
 const state = {
   correct: { url: process.env.COLAB_API_URL || null, lastRegisteredAt: null },
   predict: { url: process.env.COLAB_PREDICT_API_URL || null, lastRegisteredAt: null },
+  sensitivity: { url: process.env.COLAB_SENSITIVITY_API_URL || null, lastRegisteredAt: null },
 }
 
 export function isValidService(service) {

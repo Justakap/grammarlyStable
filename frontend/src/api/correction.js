@@ -25,7 +25,7 @@ function withTimeout(ms) {
  * Sends Hinglish text to our backend for correction.
  * Throws an Error with a user-friendly message on any failure.
  */
-export async function correctText(text) {
+export async function correctText(text, persona = 'none') {
   const { signal, cancel } = withTimeout(30000)
 
   let response
@@ -33,7 +33,7 @@ export async function correctText(text) {
     response = await fetch(`${BASE}/api/correct`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ text }),
+      body: JSON.stringify({ text, persona }),
       signal,
     })
   } catch (err) {
@@ -89,14 +89,14 @@ export async function getModelStatus(service = 'correct') {
  * Never throws — resolves to [] on any failure, so a flaky prediction
  * model never disrupts typing.
  */
-export async function predictNextWords(text) {
+export async function predictNextWords(text, persona = 'none') {
   const { signal, cancel } = withTimeout(8000)
 
   try {
     const response = await fetch(`${BASE}/api/predict`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ text }),
+      body: JSON.stringify({ text, persona }),
       signal,
     })
     cancel()
@@ -107,5 +107,31 @@ export async function predictNextWords(text) {
   } catch {
     cancel()
     return []
+  }
+}
+
+/**
+ * Scores how sensitive/offensive the text is (0 safe - 100 offensive).
+ * Never throws — resolves to null on any failure, so tone checking never
+ * disrupts typing.
+ */
+export async function scoreSensitivity(text) {
+  const { signal, cancel } = withTimeout(10000)
+
+  try {
+    const response = await fetch(`${BASE}/api/sensitivity`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ text }),
+      signal,
+    })
+    cancel()
+    if (!response.ok) return null
+    const data = await parseJsonSafe(response)
+    if (!data || typeof data.score !== 'number' || typeof data.band !== 'string') return null
+    return { score: data.score, band: data.band }
+  } catch {
+    cancel()
+    return null
   }
 }

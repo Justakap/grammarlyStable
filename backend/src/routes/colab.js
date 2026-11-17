@@ -34,7 +34,7 @@ router.post('/colab/register', (req, res) => {
   }
 
   if (service !== undefined && !isValidService(service)) {
-    return res.status(400).json({ error: 'If provided, "service" must be "correct" or "predict".' })
+    return res.status(400).json({ error: 'If provided, "service" must be "correct", "predict" or "sensitivity".' })
   }
 
   setColabUrl(url, service)

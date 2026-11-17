@@ -1,12 +1,13 @@
 import { Router } from 'express'
 import { getColabUrl } from '../lib/colabStore.js'
+import { parsePersona, PERSONA_ERROR } from '../lib/persona.js'
 
 const router = Router()
 
 const COLAB_TIMEOUT_MS = Number(process.env.COLAB_REQUEST_TIMEOUT_MS || 25000)
 
 router.post('/correct', async (req, res) => {
-  const { text } = req.body || {}
+  const { text, persona } = req.body || {}
 
   if (typeof text !== 'string' || text.trim().length === 0) {
     return res.status(400).json({ error: 'Please provide a non-empty "text" field.' })
@@ -14,6 +15,11 @@ router.post('/correct', async (req, res) => {
 
   if (text.length > 2000) {
     return res.status(400).json({ error: 'Text is too long. Please shorten your sentence.' })
+  }
+
+  const personaValue = parsePersona(persona)
+  if (personaValue === null) {
+    return res.status(400).json({ error: PERSONA_ERROR })
   }
 
   const colabUrl = getColabUrl('correct')
@@ -33,7 +39,7 @@ router.post('/correct', async (req, res) => {
     const upstream = await fetch(`${colabUrl.replace(/\/+$/, '')}/correct`, {
       method: 'POST',
       headers,
-      body: JSON.stringify({ text: text.trim() }),
+      body: JSON.stringify({ text: text.trim().slice(0, 1000), persona: personaValue }),
       signal: controller.signal,
     })
 

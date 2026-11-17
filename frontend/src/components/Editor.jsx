@@ -1,11 +1,13 @@
-import { useCallback, useLayoutEffect, useRef, useState } from 'react'
-import { correctText, predictNextWords } from '../api/correction'
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { correctText, predictNextWords, scoreSensitivity } from '../api/correction'
 import { diffWords } from '../utils/wordDiff'
+import SensitivityMeter from './SensitivityMeter'
 import { getCaretOffset, setCaretOffset } from '../utils/caret'
 
 const CHECK_DEBOUNCE_MS = 900
+const SENS_DEBOUNCE_MS = 700
 
-export default function Editor({ value, onChange, onClear }) {
+export default function Editor({ value, onChange, onClear, persona = 'none' }) {
   const charCount = value.length
   const wordCount = value.trim() === '' ? 0 : value.trim().split(/\s+/).length
 
@@ -13,12 +15,16 @@ export default function Editor({ value, onChange, onClear }) {
   const [issues, setIssues] = useState([])
   const [checking, setChecking] = useState(false)
   const [hoveredIssue, setHoveredIssue] = useState(null)
+  const [sensitivity, setSensitivity] = useState(null)
+  const [scoring, setScoring] = useState(false)
 
   const editableRef = useRef(null)
   const pendingCaretRef = useRef(null)
   const predictRequestIdRef = useRef(0)
   const checkRequestIdRef = useRef(0)
   const checkTimerRef = useRef(null)
+  const sensRequestIdRef = useRef(0)
+  const sensTimerRef = useRef(null)
 
   const runCheck = useCallback((text) => {
     const trimmed = text.trim()
@@ -28,7 +34,7 @@ export default function Editor({ value, onChange, onClear }) {
     }
     const requestId = ++checkRequestIdRef.current
     setChecking(true)
-    correctText(trimmed)
+    correctText(trimmed, persona)
       .then((corrected) => {
         if (checkRequestIdRef.current !== requestId) return
         setIssues(diffWords(text, corrected))
@@ -39,7 +45,53 @@ export default function Editor({ value, onChange, onClear }) {
       .finally(() => {
         if (checkRequestIdRef.current === requestId) setChecking(false)
       })
+  }, [persona])
+
+  const runSensitivity = useCallback((text) => {
+    const trimmed = text.trim()
+    const requestId = ++sensRequestIdRef.current
+    if (!trimmed) {
+      setSensitivity(null)
+      setScoring(false)
+      return
+    }
+    setScoring(true)
+    scoreSensitivity(trimmed).then((result) => {
+      if (sensRequestIdRef.current !== requestId) return
+      setScoring(false)
+      if (result) setSensitivity(result)
+    })
   }, [])
+
+  function scheduleSensitivity(text) {
+    clearTimeout(sensTimerRef.current)
+    sensTimerRef.current = setTimeout(() => runSensitivity(text), SENS_DEBOUNCE_MS)
+  }
+
+  useEffect(() => {
+    return () => {
+      clearTimeout(checkTimerRef.current)
+      clearTimeout(sensTimerRef.current)
+    }
+  }, [])
+
+  // Re-check the current text when the persona changes (not on first render).
+  const valueRef = useRef(value)
+  const firstRenderRef = useRef(true)
+  useEffect(() => {
+    valueRef.current = value
+  }, [value])
+  useEffect(() => {
+    if (firstRenderRef.current) {
+      firstRenderRef.current = false
+      return
+    }
+    setSuggestions([])
+    if (valueRef.current.trim()) {
+      clearTimeout(checkTimerRef.current)
+      runCheck(valueRef.current)
+    }
+  }, [persona, runCheck])
 
   function scheduleCheck(text) {
     clearTimeout(checkTimerRef.current)
@@ -48,7 +100,7 @@ export default function Editor({ value, onChange, onClear }) {
 
   async function fetchSuggestions(text) {
     const requestId = ++predictRequestIdRef.current
-    const predictions = await predictNextWords(text)
+    const predictions = await predictNextWords(text, persona)
     if (predictRequestIdRef.current !== requestId) return
     setSuggestions(predictions)
   }
@@ -73,6 +125,15 @@ export default function Editor({ value, onChange, onClear }) {
     }
 
     scheduleCheck(newValue)
+    scheduleSensitivity(newValue)
+  }
+
+  function handleClear() {
+    clearTimeout(sensTimerRef.current)
+    sensRequestIdRef.current++
+    setSensitivity(null)
+    setScoring(false)
+    onClear()
   }
 
   function handleKeyDown(e) {
@@ -96,6 +157,7 @@ export default function Editor({ value, onChange, onClear }) {
     setIssues([]) // show the fix immediately instead of the stale pre-fix text until the next check lands
     clearTimeout(checkTimerRef.current)
     runCheck(newValue)
+    runSensitivity(newValue)
   }
 
   function handleSelectSuggestion(word) {
@@ -114,6 +176,7 @@ export default function Editor({ value, onChange, onClear }) {
 
     clearTimeout(checkTimerRef.current)
     runCheck(newValue)
+    runSensitivity(newValue)
     fetchSuggestions(newValue)
   }
 
@@ -219,6 +282,8 @@ export default function Editor({ value, onChange, onClear }) {
         </div>
       )}
 
+      <SensitivityMeter result={sensitivity} loading={scoring} />
+
       <div className="editor-footer">
         <div className="editor-counts">
           <span>{charCount} characters</span>
@@ -227,7 +292,7 @@ export default function Editor({ value, onChange, onClear }) {
           {checking && <span className="editor-checking">Checking…</span>}
         </div>
         <div className="editor-actions">
-          <button type="button" className="btn btn-secondary" onClick={onClear} disabled={value.length === 0}>
+          <button type="button" className="btn btn-secondary" onClick={handleClear} disabled={value.length === 0}>
             Clear
           </button>
         </div>
